@@ -1,0 +1,16 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/corFundo</item>
+        <item name="android:textColor">@color/corTexto</item>
+        <item name="android:textColorPrimary">@color/corTitulo</item>
+        <item name="android:button">@color/botao_cadastro</item>
+        <item name="android:buttonCornerRadius">15dp</item>
+    </style>
+
+</resources>
