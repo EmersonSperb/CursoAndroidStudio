@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
     conta.sacar(20);//180
     System.out.println(conta.saldo);
 
+    Pessoa pessoa = new Pessoa();
+    pessoa.exibirDados("Emerson");
+    pessoa.exibirDados("Emerson",37);
+
      /*Funcionario funcionario = new Funcionario();
      funcionario.nome = "Emerson";
      funcionario.salario = 2500.00;
