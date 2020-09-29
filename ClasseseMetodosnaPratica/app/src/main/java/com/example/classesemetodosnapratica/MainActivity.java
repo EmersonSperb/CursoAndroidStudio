@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     Pessoa pessoa = new Pessoa();
     pessoa.exibirDados("Emerson");
     pessoa.exibirDados("Emerson",37);
+    ContaBancaria contaBanco = new ContaBancaria();
 
      /*Funcionario funcionario = new Funcionario();
      funcionario.nome = "Emerson";
