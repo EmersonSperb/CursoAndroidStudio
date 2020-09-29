@@ -11,6 +11,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+    Conta conta = new Conta();
+    conta.depositar(100);//200
+    conta.sacar(20);//180
+    System.out.println(conta.saldo);
+
      /*Funcionario funcionario = new Funcionario();
      funcionario.nome = "Emerson";
      funcionario.salario = 2500.00;
@@ -23,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     minhaCasa2 = new Casa();
     System.out.println(minhaCasa.cor);
     minhaCasa.abrirPorta();*/
-   Animal animal = new Animal();
+   /*Animal animal = new Animal();
    animal.correr();
    animal.dormir();
 
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
    System.out.println(cao.getCor());
 
    passaro.setTamanho(20);
-   System.out.println(passaro.getTamanho());
+   System.out.println(passaro.getTamanho());*/
+
     }
 }

@@ -1,16 +1,16 @@
-package com.example.classesemetodosnapratica;
+package com.example.classesemetodosnapratica.classes;
 
-class Animal {
-    int tamanho;
-    String cor;
-    double peso;
+public class Animal {
+    protected int tamanho;
+    protected String cor;
+    protected double peso;
 
     void dormir(){
         System.out.println("Dormir como um animal");
     }
 
     void correr(){
-         System.out.println("Correr como um animal");
+         System.out.println("Correr como um ");
     }
 
     void setCor(String cor){

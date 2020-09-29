@@ -1,4 +1,4 @@
-package com.example.classesemetodosnapratica;
+package com.example.classesemetodosnapratica.classes;
 
 class Cao extends Animal {
     void latir(){
@@ -6,7 +6,8 @@ class Cao extends Animal {
     }
 
     void correr(){
-        System.out.println("Correr como um cão");
+        super.correr();
+        System.out.println("cão");
     };
 
 }
