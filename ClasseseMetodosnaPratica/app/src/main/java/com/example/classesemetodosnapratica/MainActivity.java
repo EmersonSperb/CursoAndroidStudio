@@ -28,12 +28,14 @@ public class MainActivity extends AppCompatActivity {
      //funcionario.recuperarSalarioTela();
      double salarioRecuperado = funcionario.recuperarSalario(400,60);
      System.out.println("O salário do funcionário é " + salarioRecuperado);*/
-    /*Casa minhaCasa = new Casa();
+
+     /*Casa minhaCasa = new Casa();
     minhaCasa.cor = "blue";
     Casa minhaCasa2;
     minhaCasa2 = new Casa();
     System.out.println(minhaCasa.cor);
     minhaCasa.abrirPorta();*/
+
    /*Animal animal = new Animal();
    animal.correr();
    animal.dormir();
@@ -54,5 +56,7 @@ public class MainActivity extends AppCompatActivity {
    passaro.setTamanho(20);
    System.out.println(passaro.getTamanho());*/
 
+   Bonoro bonoro = new Bonoro();
+      bonoro.direitosDeveres();
     }
 }
