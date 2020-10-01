@@ -16,7 +16,7 @@
         android:textSize="18sp" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switchSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lembrar senha"
@@ -32,7 +32,7 @@
         android:textSize="18sp" />
 
     <ToggleButton
-        android:id="@+id/toggleButton"
+        android:id="@+id/toggleSenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ToggleButton"
@@ -40,14 +40,27 @@
         android:textOn="Ligado"
         android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="CheckBox" />
+
+    <CheckBox
+        android:id="@+id/checkSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Senha" />
+
+    <Button
+        android:id="@+id/buttonEnviar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="enviar"
         android:text="Enviar" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textResultado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Resultado"
