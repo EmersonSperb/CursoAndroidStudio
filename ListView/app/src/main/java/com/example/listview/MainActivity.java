@@ -3,8 +3,6 @@ package com.example.listview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,22 +16,11 @@ public class MainActivity extends AppCompatActivity {
             "São Leopoldo","Ivoti","Estância Velha","Sapucaia do Sul","Esteio","Canoas",
             "Porto Alegre","Igrejinha","Três Coroas","Gramado","Canela","São Francisco de Paula"
     };
-=======
-
-public class MainActivity extends AppCompatActivity {
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
-=======
-
-public class MainActivity extends AppCompatActivity {
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
         listLocais = findViewById(R.id.listLocais);
         //Cria adaptador para a Lista
         ArrayAdapter<String> adaptadorLocais = new ArrayAdapter<String>(
@@ -55,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 ).show();
             }
         });
-=======
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
-=======
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
-    }
+    };
+
 }

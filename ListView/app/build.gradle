@@ -5,15 +5,9 @@ android {
     buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "com.example.listview"
-<<<<<<< HEAD
-<<<<<<< HEAD
         minSdkVersion 14
-=======
+
         minSdkVersion 15
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
-=======
-        minSdkVersion 15
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,18 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-<<<<<<< HEAD
-<<<<<<< HEAD
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-=======
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
-=======
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
->>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
