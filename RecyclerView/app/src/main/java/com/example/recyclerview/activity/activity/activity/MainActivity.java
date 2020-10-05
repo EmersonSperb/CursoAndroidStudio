@@ -6,11 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.recyclerview.R;
 import com.example.recyclerview.activity.activity.adapter.Adapter;
 import com.example.recyclerview.activity.activity.model.Filme;
+import com.example.recyclerview.activity.activity.model.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,38 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        //evento de clique
+        recyclerView.addOnItemTouchListener(
+           new RecyclerItemClickListener(
+                   getApplicationContext(),
+                   recyclerView,
+                   new RecyclerItemClickListener.OnItemClickListener() {
+                       @Override
+                       public void onItemClick(View view, int position) {
+                           Filme filme = listaFilmes.get(position);
+                           Toast.makeText(
+                                   getApplicationContext(),
+                                   "Item clicado: " + filme.getTituloFilme() + " - " + filme.getGenero() + " - " + filme.getAno(),
+                                   Toast.LENGTH_SHORT).show();
+                       }
+
+                       @Override
+                       public void onLongItemClick(View view, int position) {
+                           Filme filme = listaFilmes.get(position);
+                           Toast.makeText(
+                                   getApplicationContext(),
+                                   "Clique longo em: " + filme.getTituloFilme() + " - " + filme.getGenero() + " - " + filme.getAno(),
+                                   Toast.LENGTH_SHORT).show();
+                       }
+
+                       @Override
+                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                       }
+                   }
+
+           )
+        );
     }
 
     public void criarFilmes(){
