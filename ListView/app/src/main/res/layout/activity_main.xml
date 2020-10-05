@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ListView
         android:id="@+id/listLocais"
         android:layout_width="0dp"
@@ -24,6 +25,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498" />
 =======
+=======
+>>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,5 +36,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
+>>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
+=======
 >>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
 </androidx.constraintlayout.widget.ConstraintLayout>
