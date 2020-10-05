@@ -1,0 +1,6 @@
+include ':app'
+<<<<<<< HEAD
+rootProject.name='List View'
+=======
+rootProject.name='ListView'
+>>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e

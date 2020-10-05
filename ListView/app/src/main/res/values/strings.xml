@@ -1,0 +1,7 @@
+<resources>
+<<<<<<< HEAD
+    <string name="app_name">List View</string>
+=======
+    <string name="app_name">ListView</string>
+>>>>>>> 49bb5d973a37a7f8ff238ea960818ef5d051ce0e
+</resources>
