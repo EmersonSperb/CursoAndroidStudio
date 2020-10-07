@@ -15,10 +15,12 @@ import com.example.cardview.R;
 import java.util.List;
 
 public class PostagemAdapter extends RecyclerView.Adapter<PostagemAdapter.MyViewHolder>{
-    private List<Postagem> listaPostagens;
 
-    public PostagemAdapter(List<Postagem> lista) {
-        this.listaPostagens = lista;
+    private List<Postagem> postagens;
+
+    public PostagemAdapter(List<Postagem> listaPostagens)
+    {
+        this.postagens = listaPostagens;
     }
 
     @NonNull
@@ -31,11 +33,11 @@ public class PostagemAdapter extends RecyclerView.Adapter<PostagemAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Postagem postagem = listaPostagens.get( position );
+        Postagem postagem = postagens.get( position );
         holder.textNome.setText(postagem.getNome());
         //holder.tempo.setText(postagem.getTempoPostagem());
         holder.textPostagem.setText(postagem.getPostagem());
-        holder.imagePostagem.setImageResource(R.drawable.imagem1);
+        holder.imagePostagem.setImageResource(postagem.getImagem());
 
 
     }
@@ -43,7 +45,7 @@ public class PostagemAdapter extends RecyclerView.Adapter<PostagemAdapter.MyView
     @Override
     public int getItemCount() {
 
-        return listaPostagens.size();
+        return postagens.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
