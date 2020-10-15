@@ -8,10 +8,12 @@
     android:orientation="vertical"
     tools:context=".Fragment.NumerosFragment">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageUm"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/um"
         app:layout_constraintBottom_toTopOf="@+id/imageTres"
         app:layout_constraintEnd_toStartOf="@+id/imageDois"
@@ -19,10 +21,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageDois"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/dois"
         app:layout_constraintBottom_toTopOf="@+id/imageQuatro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,10 +34,12 @@
         app:layout_constraintStart_toEndOf="@+id/imageUm"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageTres"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/tres"
         app:layout_constraintBottom_toTopOf="@+id/imageCinco"
         app:layout_constraintEnd_toStartOf="@+id/imageQuatro"
@@ -41,10 +47,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageUm" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageQuatro"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/quatro"
         app:layout_constraintBottom_toTopOf="@+id/imageSeis"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,10 +60,12 @@
         app:layout_constraintStart_toEndOf="@+id/imageTres"
         app:layout_constraintTop_toBottomOf="@+id/imageDois" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageCinco"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/cinco"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageSeis"
@@ -63,10 +73,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageTres" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageSeis"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/seis"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

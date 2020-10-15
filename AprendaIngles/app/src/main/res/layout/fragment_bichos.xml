@@ -17,10 +17,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageCao"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
         android:src="@drawable/cao"
         app:layout_constraintBottom_toTopOf="@+id/imageLeao"
         app:layout_constraintEnd_toStartOf="@+id/imageGato"
@@ -28,10 +31,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageGato"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/gato"
         app:layout_constraintBottom_toTopOf="@+id/imageMacaco"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,10 +44,12 @@
         app:layout_constraintStart_toEndOf="@+id/imageCao"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageLeao"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/leao"
         app:layout_constraintBottom_toTopOf="@+id/imageOvelha"
         app:layout_constraintEnd_toStartOf="@+id/imageMacaco"
@@ -50,10 +57,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageCao" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageMacaco"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/macaco"
         app:layout_constraintBottom_toTopOf="@+id/imageVaca"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,10 +70,12 @@
         app:layout_constraintStart_toEndOf="@+id/imageLeao"
         app:layout_constraintTop_toBottomOf="@+id/imageGato" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageOvelha"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/ovelha"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageVaca"
@@ -72,10 +83,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageLeao" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/imageVaca"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
         android:src="@drawable/vaca"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
