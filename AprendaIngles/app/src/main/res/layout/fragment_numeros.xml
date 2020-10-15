@@ -9,72 +9,72 @@
     tools:context=".Fragment.NumerosFragment">
 
     <ImageButton
-        android:id="@+id/imageUm"
+        android:id="@+id/buttonUm"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:src="@drawable/um"
-        app:layout_constraintBottom_toTopOf="@+id/imageTres"
-        app:layout_constraintEnd_toStartOf="@+id/imageDois"
+        app:layout_constraintBottom_toTopOf="@+id/buttonTres"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDois"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageDois"
+        android:id="@+id/buttonDois"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:src="@drawable/dois"
-        app:layout_constraintBottom_toTopOf="@+id/imageQuatro"
+        app:layout_constraintBottom_toTopOf="@+id/buttonQuatro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageUm"
+        app:layout_constraintStart_toEndOf="@+id/buttonUm"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageTres"
+        android:id="@+id/buttonTres"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:src="@drawable/tres"
-        app:layout_constraintBottom_toTopOf="@+id/imageCinco"
-        app:layout_constraintEnd_toStartOf="@+id/imageQuatro"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCinco"
+        app:layout_constraintEnd_toStartOf="@+id/buttonQuatro"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageUm" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonUm" />
 
     <ImageButton
-        android:id="@+id/imageQuatro"
+        android:id="@+id/buttonQuatro"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:src="@drawable/quatro"
-        app:layout_constraintBottom_toTopOf="@+id/imageSeis"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSeis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageTres"
-        app:layout_constraintTop_toBottomOf="@+id/imageDois" />
+        app:layout_constraintStart_toEndOf="@+id/buttonTres"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDois" />
 
     <ImageButton
-        android:id="@+id/imageCinco"
+        android:id="@+id/buttonCinco"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:src="@drawable/cinco"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageSeis"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSeis"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageTres" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonTres" />
 
     <ImageButton
-        android:id="@+id/imageSeis"
+        android:id="@+id/buttonSeis"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:background="@android:color/transparent"
@@ -83,8 +83,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageCinco"
-        app:layout_constraintTop_toBottomOf="@+id/imageQuatro" />
+        app:layout_constraintStart_toEndOf="@+id/buttonCinco"
+        app:layout_constraintTop_toBottomOf="@+id/buttonQuatro" />
 
     <ImageView
         android:id="@+id/imageView7"

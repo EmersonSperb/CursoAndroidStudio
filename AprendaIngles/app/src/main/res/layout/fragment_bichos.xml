@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/segundo_fundo"
+    android:background="@color/fundo_Bichos"
     android:orientation="vertical"
     tools:context=".Fragment.BichosFragment">
 
@@ -18,81 +18,81 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageCao"
+        android:id="@+id/buttonCao"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:background="@android:color/transparent"
+        android:background="@color/fundo_Bichos"
         android:cropToPadding="false"
         android:scaleType="centerCrop"
         android:src="@drawable/cao"
-        app:layout_constraintBottom_toTopOf="@+id/imageLeao"
-        app:layout_constraintEnd_toStartOf="@+id/imageGato"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLeao"
+        app:layout_constraintEnd_toStartOf="@+id/buttonGato"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageGato"
+        android:id="@+id/buttonGato"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:background="@android:color/transparent"
+        android:background="@color/fundo_Bichos"
         android:scaleType="centerCrop"
         android:src="@drawable/gato"
-        app:layout_constraintBottom_toTopOf="@+id/imageMacaco"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMacaco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageCao"
+        app:layout_constraintStart_toEndOf="@+id/buttonCao"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageLeao"
+        android:id="@+id/buttonLeao"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:background="@android:color/transparent"
+        android:background="@color/fundo_Bichos"
         android:scaleType="centerCrop"
         android:src="@drawable/leao"
-        app:layout_constraintBottom_toTopOf="@+id/imageOvelha"
-        app:layout_constraintEnd_toStartOf="@+id/imageMacaco"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOvelha"
+        app:layout_constraintEnd_toStartOf="@+id/buttonMacaco"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageCao" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonCao" />
 
     <ImageButton
-        android:id="@+id/imageMacaco"
+        android:id="@+id/buttonMacaco"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:background="@android:color/transparent"
+        android:background="@color/fundo_Bichos"
         android:scaleType="centerCrop"
         android:src="@drawable/macaco"
-        app:layout_constraintBottom_toTopOf="@+id/imageVaca"
+        app:layout_constraintBottom_toTopOf="@+id/buttonVaca"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageLeao"
-        app:layout_constraintTop_toBottomOf="@+id/imageGato" />
+        app:layout_constraintStart_toEndOf="@+id/buttonLeao"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGato" />
 
     <ImageButton
-        android:id="@+id/imageOvelha"
+        android:id="@+id/buttonOvelha"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:background="@android:color/transparent"
+        android:background="@color/fundo_Bichos"
         android:scaleType="centerCrop"
         android:src="@drawable/ovelha"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageVaca"
+        app:layout_constraintEnd_toStartOf="@+id/buttonVaca"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageLeao" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonLeao" />
 
     <ImageButton
-        android:id="@+id/imageVaca"
+        android:id="@+id/buttonVaca"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:background="@android:color/transparent"
+        android:background="@color/fundo_Bichos"
         android:scaleType="centerCrop"
         android:src="@drawable/vaca"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageOvelha"
-        app:layout_constraintTop_toBottomOf="@+id/imageMacaco" />
+        app:layout_constraintStart_toEndOf="@+id/buttonOvelha"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMacaco" />
 </androidx.constraintlayout.widget.ConstraintLayout>
