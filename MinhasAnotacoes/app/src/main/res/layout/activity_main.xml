@@ -7,11 +7,24 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:theme="@style/Theme.MinhasAnotacoes.AppBarOverlay" />
+        android:gravity="center"
+        android:theme="@style/Theme.MinhasAnotacoes.AppBarOverlay" >
 
-    <include layout="@layout/content_main" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            app:layout_anchorGravity="center"
+            app:srcCompat="@drawable/logo" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        layout="@layout/content_main"
+        android:padding="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -10,5 +10,6 @@
     <color name="marrom_claro">#43302a</color>
     <color name="marrom_escuro">#332520</color>
     <color name="cor_destaque">#85584a</color>
+    <color name="cor_fundo_anotação">#EFE7A6</color>
 
 </resources>
