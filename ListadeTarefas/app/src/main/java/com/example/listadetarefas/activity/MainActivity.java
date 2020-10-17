@@ -7,6 +7,8 @@ import com.example.listadetarefas.R;
 import com.example.listadetarefas.adapter.TarefaAdaper;
 import com.example.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,9 +21,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -37,17 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        //Configurar Recycler View
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new
-                DividerItemDecoration(this,
-                LinearLayout.VERTICAL));
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),LinearLayout.VERTICAL));
-        List<Tarefa>;
-        tarefaAdaper = new TarefaAdaper();
-        recyclerView.setAdapter(tarefaAdapter);
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -58,6 +58,53 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    public void carregarListaTarefas () {
+        Tarefa tarefa1 = new Tarefa();
+        tarefa1.setNomeTarefa("Levantar da cama");
+        listaTarefas.add(tarefa1);
+
+        Tarefa tarefa2 = new Tarefa();
+        tarefa2.setNomeTarefa("Lavar o rosto");
+        listaTarefas.add(tarefa2);
+
+        Tarefa tarefa3 = new Tarefa();
+        tarefa3.setNomeTarefa("Se vestir");
+        listaTarefas.add(tarefa3);
+
+        Tarefa tarefa4 = new Tarefa();
+        tarefa4.setNomeTarefa("Tomar café");
+        listaTarefas.add(tarefa4);
+
+        Toast.makeText(getApplicationContext(),
+                "Itens: " + listaTarefas.size(),
+                LENGTH_LONG).show();
+        TarefaAdaper tarefaAdaper = new TarefaAdaper(listaTarefas);
+        //Configurar Recycler View
+
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new
+                DividerItemDecoration(this,
+                LinearLayout.VERTICAL));
+        //List<Tarefa>;
+
+        recyclerView.setAdapter(tarefaAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        carregarListaTarefas();
+        Toast.makeText(
+                getApplicationContext(),
+                "Coisou " + listaTarefas.size(),
+                LENGTH_LONG).show();
+        super.onStart();
+
     }
 
     @Override
@@ -82,14 +129,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void carregarListaTarefas(){
-        Tarefa tarefa1 = new Tarefa();
-        tarefa1.setNomeTarefa("Levantar da cama");
-        listaTarefas.add(tarefa1);
-
-        Tarefa tarefa2 = new Tarefa();
-        tarefa1.setNomeTarefa("Lavar o rosto");
-        listaTarefas.add(tarefa2);
-
-    }
 }
