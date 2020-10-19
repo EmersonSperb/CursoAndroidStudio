@@ -48,7 +48,7 @@ public class TarefaAdaper extends RecyclerView.Adapter<TarefaAdaper.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-       TextView tarefa;
+       public TextView tarefa;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
