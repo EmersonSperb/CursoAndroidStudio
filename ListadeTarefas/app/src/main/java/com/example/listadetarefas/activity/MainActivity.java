@@ -4,22 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.listadetarefas.R;
-import com.example.listadetarefas.adapter.TarefaAdaper;
+import com.example.listadetarefas.adapter.TarefaAdapter;
+import com.example.listadetarefas.helper.RecyclerItemClickListener;
 import com.example.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -30,7 +33,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private TarefaAdaper tarefaAdapter;
+    private TarefaAdapter tarefaAdapter;
     private List<Tarefa> listaTarefas = new  ArrayList<>();
 
     @Override
@@ -41,7 +44,44 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recyclerView);
+        //eventos de clique
+        recyclerView.addOnItemTouchListener( new RecyclerItemClickListener(
+                getApplicationContext(),
+                recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                       Log.i("clique","onItemClick");
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        Log.i("clique","onLongItemClick");
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }
+
+        ));
+
         //this.carregarListaTarefas();
+
+
+        //Cria o adapter
+        TarefaAdapter tarefaAdapter = new TarefaAdapter(listaTarefas);
+        //Configurar Recycler View
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new
+                DividerItemDecoration(this,
+                LinearLayout.VERTICAL));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        //List<Tarefa>;
+
+        recyclerView.setAdapter(tarefaAdapter);
 
 
 
@@ -56,17 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Cria o adapter
-        TarefaAdaper tarefaAdaper = new TarefaAdaper(listaTarefas);
-        //Configurar Recycler View
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new
-                DividerItemDecoration(this,
-                LinearLayout.VERTICAL));
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        //List<Tarefa>;
-        recyclerView.setAdapter(tarefaAdapter);
+
     }
 
     @Override
@@ -131,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         carregarListaTarefas();
+
         Toast.makeText(
                 getApplicationContext(),
                 "Itens: " + listaTarefas.size(),

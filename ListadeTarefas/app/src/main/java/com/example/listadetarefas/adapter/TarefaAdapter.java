@@ -13,11 +13,11 @@ import com.example.listadetarefas.model.Tarefa;
 
 import java.util.List;
 
-public class TarefaAdaper extends RecyclerView.Adapter<TarefaAdaper.MyViewHolder> {
+public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHolder> {
 
     private List<Tarefa> listaTarefas;
-    public TarefaAdaper(List<Tarefa> lista) {
 
+    public TarefaAdapter(List<Tarefa> lista) {
         this.listaTarefas = lista;
     }
 
@@ -48,7 +48,8 @@ public class TarefaAdaper extends RecyclerView.Adapter<TarefaAdaper.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-       public TextView tarefa;
+        TextView tarefa;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

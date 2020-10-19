@@ -1,4 +1,4 @@
-package com.example.listadetarefas.model;
+package com.example.listadetarefas.helper;
 
 import android.content.Context;
 import android.view.GestureDetector;
