@@ -1,11 +1,14 @@
 package com.example.listadetarefas.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.listadetarefas.R;
 import com.example.listadetarefas.adapter.TarefaAdapter;
+import com.example.listadetarefas.helper.DbHelper;
 import com.example.listadetarefas.helper.RecyclerItemClickListener;
+import com.example.listadetarefas.helper.TarefaDAO;
 import com.example.listadetarefas.model.Tarefa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -51,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                       Log.i("clique","onItemClick");
+                       //Carregar tarefa para edição
+                        Tarefa tarefaSelecionada = listaTarefas.get(position);
+                        Intent intent = new Intent(MainActivity.this,AdicionarTarefaActivity.class);
+                        intent.putExtra("tarefaSelecionada",tarefaSelecionada);
+                        startActivity(intent);
                     }
 
                     @Override
@@ -70,18 +77,8 @@ public class MainActivity extends AppCompatActivity {
         //this.carregarListaTarefas();
 
 
-        //Cria o adapter
-        TarefaAdapter tarefaAdapter = new TarefaAdapter(listaTarefas);
-        //Configurar Recycler View
-        recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new
-                DividerItemDecoration(this,
-                LinearLayout.VERTICAL));
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        //List<Tarefa>;
 
-        recyclerView.setAdapter(tarefaAdapter);
+
 
 
 
@@ -122,46 +119,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void carregarListaTarefas () {
-        Tarefa tarefa1 = new Tarefa();
-        tarefa1.setNomeTarefa("Levantar da cama");
-        listaTarefas.add(tarefa1);
 
-        Toast.makeText(
-                getApplicationContext(),
-                tarefa1.getNomeTarefa(),
-                LENGTH_LONG).show();
-
-        Tarefa tarefa2 = new Tarefa();
-        tarefa2.setNomeTarefa("Lavar o rosto");
-        listaTarefas.add(tarefa2);
-
-        Toast.makeText(
-                getApplicationContext(),
-                tarefa2.getNomeTarefa(),
-                LENGTH_LONG).show();
-
-        Tarefa tarefa3 = new Tarefa();
-        tarefa3.setNomeTarefa("Se vestir");
-        listaTarefas.add(tarefa3);
-
-        Toast.makeText(
-                getApplicationContext(),
-                tarefa3.getNomeTarefa(),
-                LENGTH_LONG).show();
-
-        Tarefa tarefa4 = new Tarefa();
-        tarefa4.setNomeTarefa("Tomar café");
-        listaTarefas.add(tarefa4);
-        Toast.makeText(
-                getApplicationContext(),
-                tarefa4.getNomeTarefa(),
-                LENGTH_LONG).show();
+        TarefaDAO  tarefaDAO = new TarefaDAO(getApplicationContext());
+        listaTarefas = tarefaDAO.listar();
     };
 
     @Override
     protected void onStart() {
-        carregarListaTarefas();
+        this.carregarListaTarefas();
+        //Cria o adapter
+        TarefaAdapter tarefaAdapter = new TarefaAdapter(listaTarefas);
+        //Configurar Recycler View
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new
+                DividerItemDecoration(this,
+                LinearLayout.VERTICAL));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        //List<Tarefa>;
 
+        recyclerView.setAdapter(tarefaAdapter);
         Toast.makeText(
                 getApplicationContext(),
                 "Itens: " + listaTarefas.size(),
