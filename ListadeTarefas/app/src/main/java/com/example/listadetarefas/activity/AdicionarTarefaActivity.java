@@ -74,7 +74,6 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
                         }else{
                             Toast.makeText(getApplicationContext(),"Erro ao salvar tarefa",Toast.LENGTH_SHORT).show();
                         }
-
                 }
 
             }
