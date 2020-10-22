@@ -1,8 +1,10 @@
-package com.example.firebaseapp;
+package com.example.firebaseapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.firebaseapp.R;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,8 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonUpload;
     private Button buttonDeletar;
+    private Button buttonDownload;
     private ImageView imageFoto;
+    private ImageView imageDownload;
     private EditText editPasta;
+    private EditText editArquivo;
+    private String nomePasta;
+    private String nomeArquivo;
+    private Intent data;
+    private StorageReference imagemRef;
+    private StorageReference storageReference;
+    private StorageReference imagens;
 
     /*private DatabaseReference referencia = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth usuario = FirebaseAuth.getInstance();*/
@@ -40,9 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         buttonUpload = findViewById(R.id.buttonUpload);
         buttonDeletar = findViewById(R.id.buttonDeletar);
+        buttonDownload = findViewById(R.id.buttonDownload);
         imageFoto = findViewById(R.id.imageFoto);
+        imageDownload = findViewById(R.id.imageDownload);
         editPasta = findViewById(R.id.editPasta);
+        editArquivo = findViewById(R.id.editArquivo);
 
+        //Deleta as imagens
         buttonDeletar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,10 +76,33 @@ public class MainActivity extends AppCompatActivity {
                 //dados da imagem
                 byte[] dadosImagem = baos.toByteArray();
                 //Define nós para o storage
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                //StorageReference imagens = storageReference.child("imagens").child("foto-perfil");
-                StorageReference imagens = storageReference.child("imagens");//.child("foto-perfil");
-                StorageReference imagemRef = imagens.child("celular.jpeg");
+                storageReference = FirebaseStorage.getInstance().getReference();
+
+
+                if (editPasta.getText().toString().equals("") ){
+                    imagens = storageReference.child("imagens");//.child("foto-perfil");
+                    nomeArquivo = editArquivo.getText().toString();
+                    if (!nomeArquivo.isEmpty()){
+                        imagemRef = imagens.child(nomeArquivo);
+                    } else{
+                        Toast.makeText(MainActivity.this,
+                        "Informe o nome do arquivo.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    nomePasta = editPasta.getText().toString();
+                    imagens = storageReference.child("imagens").child(nomePasta);
+                    nomeArquivo = editArquivo.getText().toString();
+                    if (!nomeArquivo.isEmpty()){
+                        imagemRef = imagens.child(nomeArquivo);
+                    } else{
+                        Toast.makeText(MainActivity.this,
+                                "Informe o nome do arquivo.",
+                                Toast.LENGTH_LONG).show();
+                    }
+                     imagemRef = imagens.child(nomeArquivo);
+                }
+
                 imagemRef.delete().addOnFailureListener(MainActivity.this, new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -82,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
+        //Envia as imagens
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,17 +140,30 @@ public class MainActivity extends AppCompatActivity {
                 //dados da imagem
                 byte[] dadosImagem = baos.toByteArray();
                 //Define nós para o storage
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-                String nomePasta = editPasta.getText().toString();
+                storageReference = FirebaseStorage.getInstance().getReference();
+                nomePasta = editPasta.getText().toString();
                 if (!nomePasta.isEmpty()){
-                    StorageReference imagens = storageReference.child("imagens").child(nomePasta);
-                };
-                //StorageReference imagens = storageReference.child("imagens").child("foto-perfil");
-                StorageReference imagens = storageReference.child("imagens");//.child("foto-perfil");
-                //Nome da imagem
-                String nomeArquivo = UUID.randomUUID().toString();
-                StorageReference imagemRef = imagens.child(nomeArquivo + ".jpeg");
+                    imagens = storageReference.child("imagens").child(nomePasta);
+                    if (editArquivo.getText().toString().equals("")){
+                        nomeArquivo = UUID.randomUUID().toString();
+                    }else{
+                        nomeArquivo = editArquivo.getText().toString();
+                    }
 
+                }
+                else{
+                    imagens = storageReference.child("imagens");//.child("foto-perfil");
+                    if (editArquivo.getText().toString().equals("")){
+                        nomeArquivo = UUID.randomUUID().toString();
+                    }else{
+                        nomeArquivo = editArquivo.getText().toString();
+                    }
+                }
+                //StorageReference imagens = storageReference.child("imagens").child("foto-perfil");
+
+                //Nome da imagem
+
+                imagemRef = imagens.child(nomeArquivo);
                 //Retorna objeto que irá controlar o upload
                 UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
                 //Tratando erros
@@ -142,6 +196,50 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        buttonDownload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Configura para salvar me memória
+                imageDownload.setDrawingCacheEnabled(true);
+                imageDownload.buildDrawingCache();
+                //Recupera o Bitmap
+                Bitmap bitmap = imageDownload.getDrawingCache();
+                //Compime o Bitmap para png / jpeg
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, baos);
+                //Converte o baos para pixel brutos para uma matriz de bytes
+                //dados da imagem
+                byte[] dadosImagem = baos.toByteArray();
+                //Define nós para o storage
+                storageReference = FirebaseStorage.getInstance().getReference();
+                nomePasta = editPasta.getText().toString();
+
+                if (!nomePasta.isEmpty()){
+                    imagens = storageReference.child("imagens").child(nomePasta);
+                }
+                else{
+                    imagens = storageReference.child("imagens");//.child("foto-perfil");
+                }
+                //StorageReference imagens = storageReference.child("imagens").child("foto-perfil");
+
+                //Nome da imagem
+                nomeArquivo = editArquivo.getText().toString();
+                if (nomeArquivo.isEmpty()){
+                   Toast.makeText(getApplicationContext(),
+                           "Informe o nome do arquivo",
+                           Toast.LENGTH_LONG).show();
+                }else{
+                    imagemRef = imagens.child(nomeArquivo);
+                    Glide.with(MainActivity.this).
+                            using(new FirebaseImageLoader()).
+                            load(imagemRef).into(imageDownload);
+
+                }
+
+            }
+        });
+
 
                 //DatabaseReference usuarios = referencia.child("usuarios");
                 //Busca usuário específico
