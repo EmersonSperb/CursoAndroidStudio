@@ -2,9 +2,14 @@ package com.example.organizze;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import com.example.organizze.activity.CadastroActivity;
+import com.example.organizze.activity.LoginActivity;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
+import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 
 public class MainActivity extends IntroActivity {
@@ -14,36 +19,48 @@ public class MainActivity extends IntroActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
-        addSlide(new SimpleSlide.Builder()
-                .title("Título")
-                .description("Descrição")
-                .image(R.drawable.um)
-                .background(android.R.color.holo_green_light)
+        setButtonBackVisible(false);
+        setButtonNextVisible(false);
+
+        addSlide(new FragmentSlide.Builder()
+                .background(android.R.color.white)
+                .fragment(R.layout.intro_1)
                 .build()
         );
 
-        addSlide(new SimpleSlide.Builder()
-                .title("Título 2")
-                .description("Descrição 2 ")
-                .image(R.drawable.dois)
-                .background(android.R.color.holo_blue_light)
+        addSlide(new FragmentSlide.Builder()
+                .background(android.R.color.white)
+                .fragment(R.layout.intro_2)
                 .build()
         );
 
-        addSlide(new SimpleSlide.Builder()
-                .title("Título 3")
-                .description("Descrição 3")
-                .image(R.drawable.tres)
-                .background(android.R.color.holo_orange_light)
+        addSlide(new FragmentSlide.Builder()
+                .background(android.R.color.white)
+                .fragment(R.layout.intro_3)
                 .build()
         );
 
-        addSlide(new SimpleSlide.Builder()
-                .title("Título 4")
-                .description("Descrição 4")
-                .image(R.drawable.quatro)
-                .background(android.R.color.holo_purple)
+        addSlide(new FragmentSlide.Builder()
+                .background(android.R.color.white)
+                .fragment(R.layout.intro_4)
                 .build()
         );
+
+        addSlide(new FragmentSlide.Builder()
+                .background(android.R.color.white)
+                .fragment(R.layout.intro_cadastro)
+                .canGoForward(false)
+                .build()
+        );
+
+    }
+
+    public void btEntrar(View veiw){
+        startActivity(new Intent(this, LoginActivity.class));
+
+    }
+
+    public void buttonCadastrar(View view){
+        startActivity(new Intent(this, CadastroActivity.class));
     }
 }
