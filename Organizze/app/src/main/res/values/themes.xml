@@ -14,6 +14,24 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Tema aplicado nas despesas !-->
+    <style name="despesaTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimaryDespesa</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkDespesa</item>
+        <item name="colorAccent">@color/colorAccentDespesa</item>
+    </style>
+
+    <!-- Tema aplicado nas receitas !-->
+    <style name="receitaTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimaryReceita</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkReceita</item>
+        <item name="colorAccent">@color/colorAccentReceita</item>
+    </style>
+
     <style name="Theme.Organizze.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
