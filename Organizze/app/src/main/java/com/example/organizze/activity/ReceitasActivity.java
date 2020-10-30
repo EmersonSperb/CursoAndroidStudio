@@ -71,7 +71,7 @@ public class ReceitasActivity extends AppCompatActivity {
         String textoData = campoData.getText().toString();
 
         if (!textoValor.isEmpty()) {
-            if (!textoData.isEmpty()) {
+            if (!textoData.isEmpty() && (textoData.length() == 10 )) {
                 if (!textoDescricao.isEmpty()) {
                     if (!textoCategoria.isEmpty()) {
                         return true;

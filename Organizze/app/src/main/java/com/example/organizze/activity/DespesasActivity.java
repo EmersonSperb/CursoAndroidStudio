@@ -3,8 +3,12 @@ package com.example.organizze.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.databinding.adapters.TextViewBindingAdapter;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.text.style.TtsSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,6 +26,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class DespesasActivity extends AppCompatActivity {
 
@@ -44,13 +53,33 @@ public class DespesasActivity extends AppCompatActivity {
 
         //Preenche campo data com data atual
         campoData.setText(DateCustom.dataAtual());
+
+        /*campoValor.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+            }
+        });*/
+
         recuperarDespesaTotal();
+
     }
 
-    public void salvarDespesa(View view){
+
+    public void salvarDespesa(View view) {
         if (validarCamposDespesas()){
             movimentacao = new Movimentacao();
-            String data = campoData.getText().toString();
+            String data =  campoData.getText().toString();
             Double valorRecuperado = Double.parseDouble(campoValor.getText().toString());
             movimentacao.setValor(valorRecuperado);
             movimentacao.setCategoria(campoCategoria.getText().toString());
@@ -65,6 +94,7 @@ public class DespesasActivity extends AppCompatActivity {
         };
     }
 
+
     public Boolean validarCamposDespesas(){
 
         String textoValor = campoValor.getText().toString();
@@ -73,7 +103,7 @@ public class DespesasActivity extends AppCompatActivity {
         String textoData = campoData.getText().toString();
 
         if (!textoValor.isEmpty()) {
-            if (!textoData.isEmpty()) {
+            if (!textoData.isEmpty() && (textoData.length() == 10 )) {
                 if (!textoDescricao.isEmpty()) {
                     if (!textoCategoria.isEmpty()) {
                         return true;
@@ -95,7 +125,7 @@ public class DespesasActivity extends AppCompatActivity {
 
             } else {
                 Toast.makeText(DespesasActivity.this,
-                        "Informe a data do lançamento.",
+                        "Informe a data do lançamento.A data deve ser no formato dd/mm/aaaa",
                         Toast.LENGTH_SHORT).
                         show();
                 return false;

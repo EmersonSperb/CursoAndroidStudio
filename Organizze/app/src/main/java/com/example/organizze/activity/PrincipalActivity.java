@@ -1,5 +1,6 @@
 package com.example.organizze.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import com.example.organizze.adapter.AdapterMovimentacao;
@@ -10,6 +11,7 @@ import com.example.organizze.model.Movimentacao;
 import com.example.organizze.model.Usuario;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -21,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.organizze.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +41,7 @@ import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
     private MaterialCalendarView calendarView;
-    private RecyclerView recyclerMovimentos;
+    private RecyclerView recyclerView;
     private TextView textSaudacao;
     private TextView textSaldo;
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -50,6 +53,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private ValueEventListener valueEventListenerUsuario;
     private AdapterMovimentacao adapterMovimentacao;
     private List<Movimentacao> movimentacoes = new ArrayList<>();
+    private Movimentacao movimentacao;
     private DatabaseReference movimentacaoRef;
     String emailUsuario = autenticacao.getCurrentUser().getEmail();
     String idUsuario = Base64Custom.codificarBase64(emailUsuario);
@@ -67,17 +71,18 @@ public class PrincipalActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         calendarView = findViewById(R.id.calendarView);
+        recyclerView = findViewById(R.id.recyclerMovimentos);
         configuraCalendarView();
         swipe();
-        recyclerMovimentos = findViewById(R.id.recyclerMovimentos);
+
 
         //Configura Adapter
         adapterMovimentacao = new AdapterMovimentacao(movimentacoes,this);
         //Configura Recyclerview
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerMovimentos.setLayoutManager(layoutManager);
-        recyclerMovimentos.setHasFixedSize(true);
-        recyclerMovimentos.setAdapter(adapterMovimentacao);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterMovimentacao);
 
         textSaudacao = findViewById(R.id.textSaudacao);
         textSaldo = findViewById(R.id.textSaldo);
@@ -99,11 +104,15 @@ public class PrincipalActivity extends AppCompatActivity {
 
     public void adicionarDespesa (View view){
 
-        startActivity(new Intent(this,DespesasActivity.class));
+        startActivity(new Intent(
+                this,
+                DespesasActivity.class));
     }
 
     public void adicionarReceita (View view){
-        startActivity(new Intent(this,ReceitasActivity.class));
+        startActivity(new Intent(
+                this,
+                ReceitasActivity.class));
     }
 
     public void swipe(){
@@ -112,7 +121,6 @@ public class PrincipalActivity extends AppCompatActivity {
             public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
                 int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
-
                 return makeMovementFlags(dragFlags,swipeFlags);
             }
 
@@ -123,12 +131,24 @@ public class PrincipalActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-
+               excluirMovimentacao(viewHolder);
             }
         };
 
-        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerMovimentos);
+        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
+
+    }
+
+    public void atualizarSaldo(){
+        if (movimentacao.getTipo().equals("r")){
+            receitaTotal = receitaTotal - movimentacao.getValor();
+            usuarioRef.child("receitaTotal").setValue(receitaTotal);
+        }
+
+        if (movimentacao.getTipo().equals("d")){
+            despesaTotal = despesaTotal - movimentacao.getValor();
+            usuarioRef.child("despesaTotal").setValue(despesaTotal);
+        }        
 
     }
 
@@ -143,6 +163,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 movimentacoes.clear();
                 for (DataSnapshot dados : snapshot.getChildren()){
                     Movimentacao movimentacao = dados.getValue(Movimentacao.class);
+                    movimentacao.setKey(dados.getKey());
                     movimentacoes.add(movimentacao);
 
                 }
@@ -225,6 +246,43 @@ public class PrincipalActivity extends AppCompatActivity {
         });
     }
 
+    public void excluirMovimentacao(RecyclerView.ViewHolder viewHolder){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Excluir Movimentação");
+        alertDialog.setMessage("Deseja excluir a movimentação selecionada?");
+        alertDialog.setCancelable(false);
+
+        alertDialog.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                int position = viewHolder.getAdapterPosition();
+                movimentacao = movimentacoes.get(position);
+                movimentacaoRef = firebaseRef.child("movimentacao")
+                        .child(idUsuario)
+                        .child(mesAnoSelecionado);
+                movimentacaoRef.child(movimentacao.getKey()).removeValue();
+                adapterMovimentacao.notifyItemRemoved(position);
+                atualizarSaldo();
+            }
+        });
+
+        alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(PrincipalActivity.this,
+                        "Operação cancelada",
+                        Toast.LENGTH_SHORT)
+                        .show();
+                adapterMovimentacao.notifyDataSetChanged();
+
+            }
+        });
+
+        AlertDialog alert = alertDialog.create();
+        alert.show();
+    }
+
     @Override
     protected void onStart() {
         recuperarResumo();
@@ -236,7 +294,6 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onStop() {
         usuarioRef.removeEventListener(valueEventListenerUsuario);
         movimentacaoRef.removeEventListener(valueEventListenerMovimentacao);
-        Log.i("Evento","Evento removido.");
         super.onStop();
     }
 }
