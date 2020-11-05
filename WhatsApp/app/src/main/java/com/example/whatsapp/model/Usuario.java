@@ -23,10 +23,12 @@ public class Usuario {
 
     @Exclude
     public String getIdUsuario() {
+
         return idUsuario;
     }
 
     public void setIdUsuario(String idUsuario) {
+
         this.idUsuario = idUsuario;
     }
 
@@ -56,6 +58,7 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
+
         this.senha = senha;
     }
 }

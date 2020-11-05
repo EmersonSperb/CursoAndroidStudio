@@ -37,48 +37,41 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         campoNome = findViewById(R.id.editTextNome);
-        campoEmail = findViewById(R.id.editTextEmail);
-        campoSenha = findViewById(R.id.editTextSenha);
+        campoEmail = findViewById(R.id.editLoginEmail);
+        campoSenha = findViewById(R.id.editLoginSenha);
         buttonCadastrar = findViewById(R.id.buttonCadastrar);
+    }
 
-        buttonCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String textoNome = campoNome.getText().toString();
-                String textoEmail = campoEmail.getText().toString();
-                String textoSenha = campoSenha.getText().toString();
+    public void validarCadastroUsuario(View view){
+        String textoNome = campoNome.getText().toString();
+        String textoEmail = campoEmail.getText().toString();
+        String textoSenha = campoSenha.getText().toString();
 
-                if (!textoNome.isEmpty()) {
-                    if (!textoEmail.isEmpty()) {
-                        if (!textoSenha.isEmpty()) {
+        if (!textoNome.isEmpty()) {
+            if (!textoEmail.isEmpty()) {
+                if (!textoSenha.isEmpty()) {
 
-                            usuario = new Usuario();
-                            usuario.setNome(textoNome);
-                            usuario.setEmail(textoEmail);
-                            usuario.setSenha(textoSenha);
-                            cadastrarUsuario();
+                    usuario = new Usuario();
+                    usuario.setNome(textoNome);
+                    usuario.setEmail(textoEmail);
+                    usuario.setSenha(textoSenha);
+                    cadastrarUsuario();
 
-                        } else {
-                            Toast.makeText(CadastroActivity.this,
-                                    "Informe uma senha",
-                                    Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(CadastroActivity.this,
-                                "Informe um e-mail",
-                                Toast.LENGTH_LONG).show();
-                    }
                 } else {
                     Toast.makeText(CadastroActivity.this,
-                            "Informe um nome",
+                            "Informe uma senha",
                             Toast.LENGTH_LONG).show();
                 }
-
+            } else {
+                Toast.makeText(CadastroActivity.this,
+                        "Informe um e-mail",
+                        Toast.LENGTH_LONG).show();
             }
-
-            ;
-
-        });
+        } else {
+            Toast.makeText(CadastroActivity.this,
+                    "Informe um nome",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 
@@ -92,10 +85,10 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            /*Toast.makeText(CadastroActivity.this,
+                            Toast.makeText(CadastroActivity.this,
                                     "Usuário cadastrado com sucesso",
                                     Toast.LENGTH_SHORT).
-                                    show();*/
+                                    show();
                             String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                             usuario.setIdUsuario(idUsuario);
                             usuario.salvar();
