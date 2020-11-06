@@ -2,6 +2,8 @@ package com.example.whatsapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.support.v4.app.*;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
@@ -72,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 deslogarUsuario();
                 abrirTelaLogin();
                 break;
+
+            case R.id.menuConfiguracoes :
+                abrirTelaConfiguracoes();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -90,4 +96,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
+
+    public void abrirTelaConfiguracoes() {
+        //startActivity(new Intent(this, ConfiguracoesActivity.class));
+        Intent intent = new Intent(this, ConfiguracoesActivity.class);
+        startActivity(intent);
+    }
+
 }
