@@ -21,24 +21,41 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/padrao"
         app:civ_border_color="#FFFFFFFF"
         app:civ_border_width="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="201dp"
-        tools:layout_editor_absoluteY="364dp">
+        android:paddingLeft="16dp"
+        android:paddingTop="5dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageViewFotoPerfil">
 
         <EditText
             android:id="@+id/editTextTextPersonName"
-            android:layout_width="350dp"
+            android:layout_width="359dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
@@ -50,8 +67,23 @@
             android:layout_width="wrap_content"
             android:layout_height="43dp"
             android:layout_gravity="center_vertical"
-            app:srcCompat="@drawable/ic_editar_verde" />
+            android:background="@drawable/ic_editar_verde" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:text="Este não é nem seu nome de usuário e nem senha. Esse nome ficará visível para seus contatos do Whatsapp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package com.example.whatsapp.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -95,6 +96,8 @@ public class CadastroActivity extends AppCompatActivity {
 
                             finish();
 
+                            abrirTelaPrincipal();
+
                         }else{
 
                             String excecao = "";
@@ -122,5 +125,10 @@ public class CadastroActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void abrirTelaPrincipal() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 }
