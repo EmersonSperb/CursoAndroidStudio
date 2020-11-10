@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.whatsapp.R;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.example.whatsapp.helper.Base64Custom;
+import com.example.whatsapp.helper.UsuarioFirebase;
 import com.example.whatsapp.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -93,6 +94,8 @@ public class CadastroActivity extends AppCompatActivity {
                             String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                             usuario.setIdUsuario(idUsuario);
                             usuario.salvar();
+
+                            UsuarioFirebase.atualizarNomeUsuario(usuario.getNome());
 
                             finish();
 

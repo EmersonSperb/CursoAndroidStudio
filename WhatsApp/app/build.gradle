@@ -37,13 +37,16 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.google.firebase:firebase-core:11.8.0'
-    implementation 'com.google.firebase:firebase-database:11.8.0'
-    implementation 'com.google.firebase:firebase-auth:11.8.0'
-    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.google.firebase:firebase-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
+    implementation 'com.firebaseui:firebase-ui-storage:6.2.0'
     //dependências para abas
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    android.defaultConfig.vectorDrawables.useSupportLibrary = true
+
 }
 apply plugin: 'com.google.gms.google-services'
