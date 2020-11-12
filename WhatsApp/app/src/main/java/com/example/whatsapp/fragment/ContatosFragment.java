@@ -1,5 +1,7 @@
 package com.example.whatsapp.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.example.whatsapp.R;
+import com.example.whatsapp.activity.ChatActivity;
 import com.example.whatsapp.adapter.ContatosAdapter;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.example.whatsapp.helper.RecyclerItemClickListener;
@@ -96,29 +99,42 @@ public class ContatosFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerViewListaContatos.setLayoutManager(layoutManager);
         recyclerViewListaContatos.setHasFixedSize(true);
-        adapter = new ContatosAdapter(listaContatos,getActivity());
+        adapter = new ContatosAdapter(listaContatos, getActivity());
         recyclerViewListaContatos.setAdapter(adapter);
-        recyclerViewListaContatos.addOnItemTouchListener(new RecyclerItemClickListener(
-                getActivity(),
-                recyclerViewListaContatos,
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        
-                    }
 
-                    @Override
-                    public void onLongItemClick(View view, int position) {
+        recyclerViewListaContatos.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        getActivity(),
+                        recyclerViewListaContatos,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
 
-                    }
+                                Usuario usuarioSelecionado = listaContatos.get(position);
+                                Intent i = new Intent(getActivity(), ChatActivity.class);
+                                i.putExtra("chatContato",usuarioSelecionado);
+                                startActivity(i);
 
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            }
 
-                    }
-                }
-                )
-        );
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                ));
+
+
+        return view;
+
+    };
+
+
 
     public void recuperarContatos(){
         valueEventListenerContatos = usuariosRef.addValueEventListener(new ValueEventListener() {

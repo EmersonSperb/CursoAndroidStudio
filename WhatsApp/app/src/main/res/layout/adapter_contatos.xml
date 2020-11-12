@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="5dp">
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="6dp">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageViewFoto"
+        android:id="@+id/imageViewFotoContato"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/foto_perfil"
@@ -36,7 +44,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/email" />
-
     </LinearLayout>
+</LinearLayout>
+
+   <ImageView
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="?android:attr/listDivider"
+       android:layout_marginLeft="66dp"
+       />
 
 </LinearLayout>

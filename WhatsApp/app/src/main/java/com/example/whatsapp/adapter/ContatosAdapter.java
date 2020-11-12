@@ -68,7 +68,7 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
 
             nome = itemView.findViewById(R.id.textNomeContato);
             email = itemView.findViewById(R.id.textEmailContato);
-            foto = itemView.findViewById(R.id.imageViewFoto);
+            foto = itemView.findViewById(R.id.imageViewFotoContato);
         }
     }
 
