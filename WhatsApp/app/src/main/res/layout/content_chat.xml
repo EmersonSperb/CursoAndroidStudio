@@ -44,11 +44,17 @@
                 android:ems="10"
                 android:inputType="textPersonName"/>
 
-            <ImageView
-                android:id="@+id/imageView3"
+            <ImageButton
+                android:id="@+id/imageCameraChat"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 app:srcCompat="@drawable/ic_camera_cinza" />
+
+            <ImageButton
+                android:id="@+id/imageGaleriaChat"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/ic_foto_cinza" />
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
