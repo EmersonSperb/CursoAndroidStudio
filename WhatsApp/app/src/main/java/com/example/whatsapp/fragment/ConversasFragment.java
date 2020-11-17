@@ -3,12 +3,20 @@ package com.example.whatsapp.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.whatsapp.R;
+import com.example.whatsapp.adapter.ContatosAdapter;
+import com.example.whatsapp.model.Usuario;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +24,13 @@ import com.example.whatsapp.R;
  * create an instance of this fragment.
  */
 public class ConversasFragment extends Fragment {
+
+    private RecyclerView recyclerViewListaConversas;
+    private ContatosAdapter adapter;
+    private ArrayList<Usuario> listaConversas = new ArrayList<>();
+    private DatabaseReference usuariosRef;
+    private ValueEventListener valueEventListenerConversas;
+    private FirebaseUser usuarioAtual;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
