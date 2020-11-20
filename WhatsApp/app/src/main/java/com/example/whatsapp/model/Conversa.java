@@ -3,11 +3,15 @@ package com.example.whatsapp.model;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.google.firebase.database.DatabaseReference;
 
-public class Conversa {
+import java.io.Serializable;
+
+public class Conversa implements Serializable {
     private String idRemetente;
     private String idDestinatario;
     private String ultimaMensagem;
     private Usuario usuarioExibicao;
+    private String foto;
+
 
     public Conversa() {
     }
@@ -54,4 +58,11 @@ public class Conversa {
         this.usuarioExibicao = usuarioExibicao;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }
