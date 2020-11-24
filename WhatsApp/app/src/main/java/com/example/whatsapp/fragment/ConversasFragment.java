@@ -166,7 +166,6 @@ public class ConversasFragment extends Fragment {
         childEventListenerConversas = conversasRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
                 Conversa conversa = snapshot.getValue(Conversa.class);
                 listaConversas.add(conversa);
                 adapter.notifyDataSetChanged();

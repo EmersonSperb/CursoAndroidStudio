@@ -17,10 +17,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsApp">
         <activity
+            android:name=".activity.CadastroGrupoActivity"
+            android:label="@string/title_activity_cadastro_grupo"
+            android:theme="@style/Theme.WhatsApp.NoActionBar"
+            android:parentActivityName=".activity.GrupoActivity"></activity>
+        <activity
+            android:name=".activity.GrupoActivity"
+            android:label="@string/title_activity_grupo"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/Theme.WhatsApp.NoActionBar" />
+        <activity
             android:name=".activity.ChatActivity"
             android:label="@string/title_activity_chat"
-            android:theme="@style/Theme.WhatsApp.NoActionBar"
-            android:parentActivityName=".activity.MainActivity"></activity>
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/Theme.WhatsApp.NoActionBar" />
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,5 @@
 package com.example.whatsapp.fragment;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,13 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.example.whatsapp.R;
 import com.example.whatsapp.activity.ChatActivity;
+import com.example.whatsapp.activity.GrupoActivity;
 import com.example.whatsapp.adapter.ContatosAdapter;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.example.whatsapp.helper.RecyclerItemClickListener;
@@ -111,9 +110,17 @@ public class ContatosFragment extends Fragment {
                             public void onItemClick(View view, int position) {
 
                                 Usuario usuarioSelecionado = listaContatos.get(position);
-                                Intent i = new Intent(getActivity(), ChatActivity.class);
-                                i.putExtra("chatContato",usuarioSelecionado);
-                                startActivity(i);
+                                boolean cabecalho = usuarioSelecionado.getEmail().isEmpty();
+                                if (cabecalho){
+
+                                    Intent i = new Intent(getActivity(), GrupoActivity.class);
+                                    startActivity(i);
+
+                                }else{
+                                   Intent i = new Intent(getActivity(), ChatActivity.class);
+                                   i.putExtra("chatContato",usuarioSelecionado);
+                                   startActivity(i);
+                                }
 
                             }
 
@@ -128,7 +135,16 @@ public class ContatosFragment extends Fragment {
                             }
                         }
                 ));
+        //Evita duplicação dos contatos
+        listaContatos.clear();
 
+        /*Define usuário com e-mail vazio
+        em caso de e-mail vazio o usuário será usado como cabeçalho
+        exibindo Novo Grupo*/
+        Usuario itemGrupo = new Usuario();
+        itemGrupo.setNome("Novo Grupo");
+        itemGrupo.setEmail("");
+        listaContatos.add(itemGrupo);
 
         return view;
 
