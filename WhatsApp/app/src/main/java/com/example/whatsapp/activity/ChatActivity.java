@@ -91,6 +91,7 @@ public class ChatActivity extends AppCompatActivity {
         imageCameraChat = findViewById(R.id.imageCameraChat);
         imageGaleriaChat = findViewById(R.id.imageGaleriaChat);
 
+
         //Usuário remetente
         idUsuarioRemetente = UsuarioFirebase.getIdentificadorUsuario();
 
