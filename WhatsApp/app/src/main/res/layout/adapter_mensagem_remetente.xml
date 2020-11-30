@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
        android:layout_height="wrap_content">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,12 +15,12 @@
         android:layout_alignParentRight="true">
 
         <TextView
-            android:id="@+id/textMensagemTexto"
+            android:id="@+id/textNomeExibicao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="18sp"
-            tools:text="@string/mensagemTeste" />
+            android:text="Emerson"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageMensagemFoto"
@@ -27,5 +28,13 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/padrao"
             tools:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textMensagemTexto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="18sp"
+            tools:text="@string/mensagemTeste" />
     </LinearLayout>
 </RelativeLayout>
