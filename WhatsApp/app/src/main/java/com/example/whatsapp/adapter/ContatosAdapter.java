@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.whatsapp.R;
+import com.example.whatsapp.model.Conversa;
 import com.example.whatsapp.model.Usuario;
 
 import java.util.List;
@@ -26,6 +27,10 @@ public class ContatosAdapter extends RecyclerView.Adapter<ContatosAdapter.MyView
     public ContatosAdapter(List<Usuario> listaContatos, Context c) {
         this.contatos = listaContatos;
         this.context = c;
+    }
+
+    public List<Usuario> getContatos(){
+        return this.contatos;
     }
 
     @NonNull

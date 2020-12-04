@@ -17,9 +17,11 @@ import com.example.whatsapp.R;
 import com.example.whatsapp.activity.ChatActivity;
 import com.example.whatsapp.activity.GrupoActivity;
 import com.example.whatsapp.adapter.ContatosAdapter;
+import com.example.whatsapp.adapter.ConversasAdapter;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.example.whatsapp.helper.RecyclerItemClickListener;
 import com.example.whatsapp.helper.UsuarioFirebase;
+import com.example.whatsapp.model.Conversa;
 import com.example.whatsapp.model.Usuario;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,7 +112,8 @@ public class ContatosFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, int position) {
 
-                                Usuario usuarioSelecionado = listaContatos.get(position);
+                                List<Usuario> listaUsuariosAtualizada = adapter.getContatos();
+                                Usuario usuarioSelecionado = listaUsuariosAtualizada.get(position);
                                 boolean cabecalho = usuarioSelecionado.getEmail().isEmpty();
                                 if (cabecalho){
 
@@ -136,8 +140,18 @@ public class ContatosFragment extends Fragment {
                         }
                 ));
         //Evita duplicação dos contatos
-        listaContatos.clear();
+        limparListaContatos();
 
+        return view;
+
+    };
+
+    public void limparListaContatos(){
+        listaContatos.clear();
+        adicionarMenuNovoGrupo();
+    };
+
+    public void adicionarMenuNovoGrupo(){
         /*Define usuário com e-mail vazio
         em caso de e-mail vazio o usuário será usado como cabeçalho
         exibindo Novo Grupo*/
@@ -145,11 +159,29 @@ public class ContatosFragment extends Fragment {
         itemGrupo.setNome("Novo Grupo");
         itemGrupo.setEmail("");
         listaContatos.add(itemGrupo);
+    }
 
-        return view;
+    public void pesquisarContatos(String texto){
+        //Log.i("pesquisa",texto);
+        List<Usuario> listaContatosBusca = new ArrayList<>();
+        for (Usuario usuario : listaContatos){
+                String nome = usuario.getNome().toLowerCase();
+                if (nome.contains(texto)){
+                    listaContatosBusca.add(usuario);
+                }
+            }
 
+
+        adapter = new ContatosAdapter(listaContatosBusca,getActivity());
+        recyclerViewListaContatos.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void recarregarContatos(){
+        adapter = new ContatosAdapter(listaContatos,getActivity());
+        recyclerViewListaContatos.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     };
-
 
 
     public void recuperarContatos(){

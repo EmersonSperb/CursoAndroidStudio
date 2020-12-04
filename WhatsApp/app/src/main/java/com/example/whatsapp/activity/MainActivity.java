@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.whatsapp.R;
+import com.example.whatsapp.adapter.ContatosAdapter;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.example.whatsapp.fragment.ContatosFragment;
 import com.example.whatsapp.fragment.ConversasFragment;
@@ -85,11 +86,28 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 //Log.i("evento","onQueryTextChange");
 
-                ConversasFragment fragment = (ConversasFragment) adapter.getPage(0);
-                if (newText != null && !newText.isEmpty()){
-                    fragment.pesquisarConversas(newText.toLowerCase());
+                switch (viewPager.getCurrentItem()){
+                    case 0 :
+                        ConversasFragment conversasFragment = (ConversasFragment) adapter.getPage(0);
+                        if (newText != null && !newText.isEmpty()){
+                            conversasFragment.pesquisarConversas(newText.toLowerCase());
+                        }else{
+                            conversasFragment.recuperarConversas();
+                        }
+                        break;
+
+                    case 1 :
+                        ContatosFragment contatosFragment = (ContatosFragment) adapter.getPage(1);
+                        if (newText != null && !newText.isEmpty()){
+                            contatosFragment.pesquisarContatos(newText.toLowerCase());
+                        }else{
+                            contatosFragment.recarregarContatos();
+                        }
+                        break;
 
                 }
+
+
 
                 return true;
             }
