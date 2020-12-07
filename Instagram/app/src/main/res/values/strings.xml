@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="cadastre">Cadastre-se</string>
+    <string name="botaoCadastro">Cadastrar</string>
+    <string name="nome">Nome</string>
+</resources>
