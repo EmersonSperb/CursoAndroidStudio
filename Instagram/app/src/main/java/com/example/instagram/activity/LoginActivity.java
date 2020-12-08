@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,30 +24,28 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText editLoginEmail;
-    private EditText editLoginSenha;
+    private EditText campoEmail;
+    private EditText campoSenha;
     private TextView textCadastrar;
     private Button buttonLogin;
     private FirebaseAuth autenticacao;
     private Usuario usuario;
+    private ProgressBar progressBarLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editLoginEmail    = findViewById(R.id.editLoginEmail);
-        editLoginSenha    = findViewById(R.id.editLoginSenha);
-        textCadastrar  = findViewById(R.id.textCadastrar);
-        buttonLogin = findViewById(R.id.buttonLogin);
-
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-
+        verificarUsuarioLogado();
+        inicializarComponentes();
+        progressBarLogin.setVisibility(View.GONE);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textoEmail = editLoginEmail.getText().toString();
-                String textoSenha = editLoginSenha.getText().toString();
+                progressBarLogin.setVisibility(View.VISIBLE);
+                String textoEmail = campoEmail.getText().toString();
+                String textoSenha = campoSenha.getText().toString();
 
                 if (!textoEmail.isEmpty()) {
                     if (!textoSenha.isEmpty()) {
@@ -66,10 +65,21 @@ public class LoginActivity extends AppCompatActivity {
                             "Informe um e-mail",
                             Toast.LENGTH_LONG).show();
                 }
-
             }
+
         });
 
+    }
+
+    public void inicializarComponentes(){
+        campoEmail = findViewById(R.id.editLoginEmail);
+        campoSenha = findViewById(R.id.editLoginSenha);
+        textCadastrar  = findViewById(R.id.textCadastrar);
+        buttonLogin = findViewById(R.id.buttonLogin);
+        progressBarLogin = findViewById(R.id.progressLogin);
+
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        campoEmail.requestFocus();
     }
 
     public void validarLogin() {
@@ -81,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            progressBarLogin.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this,
                                     "Login efetuado com sucesso",
                                     Toast.LENGTH_SHORT).
@@ -89,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                             abrirTelaPrincipal();
 
                         } else {
+                            progressBarLogin.setVisibility(View.GONE);
 
                             String excecao = "";
                             try {
@@ -117,9 +129,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
+        /*FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
         if (usuarioAtual != null){
             abrirTelaPrincipal();
+        }*/
+    }
+
+    public void verificarUsuarioLogado(){
+      autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+      if (autenticacao.getCurrentUser() != null){
+          startActivity(new Intent(this, MainActivity.class));
+          finish();
         }
     }
 

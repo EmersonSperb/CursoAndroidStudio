@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,38 +25,44 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class CadastroActivity extends AppCompatActivity {
-    private EditText editCadastroEmail;
-    private EditText editCadastroSenha;
-    private EditText editCadastroNome;
+    private EditText campoEmail;
+    private EditText campoSenha;
+    private EditText campoNome;
     private Button buttonCadastro;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
+    private ProgressBar progressBarCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        inicializarComponentes();
 
-        editCadastroNome = findViewById(R.id.editCadastroNome);
-        editCadastroEmail = findViewById(R.id.editCadastroEmail);
-        editCadastroSenha = findViewById(R.id.editCadastroSenha);
-        buttonCadastro = findViewById(R.id.buttonCadastrar);
     }
+    public void inicializarComponentes(){
+        campoNome = findViewById(R.id.editCadastroNome);
+        campoEmail = findViewById(R.id.editCadastroEmail);
+        campoSenha = findViewById(R.id.editCadastroSenha);
+        buttonCadastro = findViewById(R.id.buttonCadastrar);
+        progressBarCadastro = findViewById(R.id.progressCadastro);
+        campoNome.requestFocus();
+    };
 
     public void validarCadastroUsuario(View view){
-        String textoNome = editCadastroNome.getText().toString();
-        String textoEmail = editCadastroEmail.getText().toString();
-        String textoSenha = editCadastroSenha.getText().toString();
+        String textoNome = campoNome.getText().toString();
+        String textoEmail = campoEmail.getText().toString();
+        String textoSenha = campoSenha.getText().toString();
 
         if (!textoNome.isEmpty()) {
             if (!textoEmail.isEmpty()) {
                 if (!textoSenha.isEmpty()) {
-
+                    progressBarCadastro.setVisibility(View.VISIBLE);
                     usuario = new Usuario();
                     usuario.setNome(textoNome);
                     usuario.setEmail(textoEmail);
                     usuario.setSenha(textoSenha);
-                    cadastrarUsuario();
+                    cadastrar(usuario);
 
                 } else {
                     Toast.makeText(CadastroActivity.this,
@@ -71,11 +78,12 @@ public class CadastroActivity extends AppCompatActivity {
             Toast.makeText(CadastroActivity.this,
                     "Informe um nome",
                     Toast.LENGTH_LONG).show();
+
         }
     }
 
 
-    public void cadastrarUsuario(){
+    public void cadastrar(Usuario usuario){
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
@@ -85,6 +93,7 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+                            progressBarCadastro.setVisibility(View.GONE);
                             Toast.makeText(CadastroActivity.this,
                                     "Usuário cadastrado com sucesso",
                                     Toast.LENGTH_SHORT).
@@ -100,6 +109,8 @@ public class CadastroActivity extends AppCompatActivity {
                             abrirTelaPrincipal();
 
                         }else{
+
+                            progressBarCadastro.setVisibility(View.GONE);
 
                             String excecao = "";
                             try {
