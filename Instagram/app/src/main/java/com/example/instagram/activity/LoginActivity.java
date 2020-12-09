@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validarLogin() {
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        //autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(
                 usuario.getEmail(),
                 usuario.getSenha()).
@@ -129,10 +129,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
+        //autenticacao.signOut();
+        FirebaseUser usuarioAtual = autenticacao.getCurrentUser();
         if (usuarioAtual != null){
             abrirTelaPrincipal();
-        }*/
+        }
     }
 
     public void verificarUsuarioLogado(){
