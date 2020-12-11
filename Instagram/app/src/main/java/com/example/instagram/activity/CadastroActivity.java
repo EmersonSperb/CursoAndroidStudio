@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.instagram.R;
 import com.example.instagram.config.ConfiguracaoFirebase;
-import com.example.instagram.helper.Base64Custom;
-import com.example.instagram.helper.UsuarioFirebase;
 import com.example.instagram.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,8 +81,8 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
 
-    public void cadastrar(Usuario usuario){
-
+    public void cadastrar(final Usuario usuario){
+        progressBarCadastro.setVisibility(View.VISIBLE);
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getEmail(),
@@ -93,20 +91,29 @@ public class CadastroActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            progressBarCadastro.setVisibility(View.GONE);
-                            Toast.makeText(CadastroActivity.this,
-                                    "Usuário cadastrado com sucesso",
-                                    Toast.LENGTH_SHORT).
-                                    show();
-                            String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
-                            usuario.setIdUsuario(idUsuario);
-                            usuario.salvar();
 
-                            UsuarioFirebase.atualizarNomeUsuario(usuario.getNome());
+                            try {
+                                progressBarCadastro.setVisibility(View.GONE);
+                                //salvar dados no Firebase
 
-                            finish();
+                                String idUsuario = task.getResult().getUser().getUid();
 
-                            abrirTelaPrincipal();
+
+                                usuario.setId(idUsuario);
+                                usuario.salvar();
+
+                                Toast.makeText(CadastroActivity.this,
+                                        "Usuário cadastrado com sucesso",
+                                        Toast.LENGTH_SHORT).
+                                        show();
+                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+                                finish();
+
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+
 
                         }else{
 

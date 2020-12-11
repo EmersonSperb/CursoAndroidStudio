@@ -9,10 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">@color/white</color>
     <color name="colorPrimaryDark">#462759</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#a03d89</color>
     <color name="cinza_medio">#dbdbdb</color>
     <color name="cinza_escuro">#3a3a3a</color>
     <color name="roxo">#462759</color>
     <color name="selector_item_color">@color/cinza_escuro</color>
+    <color name="azulEscuro">#3f51b5</color>
 
 </resources>
