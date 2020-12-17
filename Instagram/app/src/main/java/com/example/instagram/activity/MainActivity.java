@@ -13,7 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.instagram.R;
-import com.example.instagram.config.ConfiguracaoFirebase;
+import com.example.instagram.helper.ConfiguracaoFirebase;
 import com.example.instagram.fragment.FeedFragment;
 import com.example.instagram.fragment.PerfilFragment;
 import com.example.instagram.fragment.PesquisaFragment;

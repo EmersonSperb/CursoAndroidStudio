@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.instagram.R;
-import com.example.instagram.config.ConfiguracaoFirebase;
+import com.example.instagram.helper.ConfiguracaoFirebase;
 import com.example.instagram.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,131 +23,147 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 public class CadastroActivity extends AppCompatActivity {
-    private EditText campoEmail;
-    private EditText campoSenha;
-    private EditText campoNome;
-    private Button buttonCadastro;
+
+    private EditText campoNome, campoEmail, campoSenha;
+    private Button botaoCadastrar;
+    private ProgressBar progressBar;
+
     private Usuario usuario;
+
     private FirebaseAuth autenticacao;
-    private ProgressBar progressBarCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
         inicializarComponentes();
 
-    }
-    public void inicializarComponentes(){
-        campoNome = findViewById(R.id.editCadastroNome);
-        campoEmail = findViewById(R.id.editCadastroEmail);
-        campoSenha = findViewById(R.id.editCadastroSenha);
-        buttonCadastro = findViewById(R.id.buttonCadastrar);
-        progressBarCadastro = findViewById(R.id.progressCadastro);
-        campoNome.requestFocus();
-    };
+        //Cadastrar usuario
+        progressBar.setVisibility(View.GONE);
+        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    public void validarCadastroUsuario(View view){
-        String textoNome = campoNome.getText().toString();
-        String textoEmail = campoEmail.getText().toString();
-        String textoSenha = campoSenha.getText().toString();
+                String textoNome  = campoNome.getText().toString();
+                String textoEmail = campoEmail.getText().toString();
+                String textosenha = campoSenha.getText().toString();
 
-        if (!textoNome.isEmpty()) {
-            if (!textoEmail.isEmpty()) {
-                if (!textoSenha.isEmpty()) {
-                    progressBarCadastro.setVisibility(View.VISIBLE);
-                    usuario = new Usuario();
-                    usuario.setNome(textoNome);
-                    usuario.setEmail(textoEmail);
-                    usuario.setSenha(textoSenha);
-                    cadastrar(usuario);
+                if( !textoNome.isEmpty() ){
+                    if( !textoEmail.isEmpty() ){
+                        if( !textosenha.isEmpty() ){
 
-                } else {
+                            usuario = new Usuario();
+                            usuario.setNome( textoNome );
+                            usuario.setEmail( textoEmail );
+                            usuario.setSenha( textosenha );
+                            cadastrar( usuario );
+
+                        }else{
+                            Toast.makeText(CadastroActivity.this,
+                                    "Preencha a senha!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(CadastroActivity.this,
+                                "Preencha o email!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }else{
                     Toast.makeText(CadastroActivity.this,
-                            "Informe uma senha",
-                            Toast.LENGTH_LONG).show();
+                            "Preencha o nome!",
+                            Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(CadastroActivity.this,
-                        "Informe um e-mail",
-                        Toast.LENGTH_LONG).show();
-            }
-        } else {
-            Toast.makeText(CadastroActivity.this,
-                    "Informe um nome",
-                    Toast.LENGTH_LONG).show();
 
-        }
+
+            }
+        });
+
+
     }
 
-
+    /**
+     * Método responsável por cadastrar usuário com e-mail e senha
+     * e fazer validações ao fazer o cadastro
+     */
     public void cadastrar(final Usuario usuario){
-        progressBarCadastro.setVisibility(View.VISIBLE);
+
+        progressBar.setVisibility(View.VISIBLE);
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getEmail(),
-                usuario.getSenha()).addOnCompleteListener(this,
+                usuario.getSenha()
+        ).addOnCompleteListener(
+                this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+
+                        if( task.isSuccessful() ){
 
                             try {
-                                progressBarCadastro.setVisibility(View.GONE);
-                                //salvar dados no Firebase
 
+                                progressBar.setVisibility(View.GONE);
+
+                                //Salvar dados no firebase
                                 String idUsuario = task.getResult().getUser().getUid();
-
-
-                                usuario.setId(idUsuario);
+                                usuario.setId( idUsuario );
                                 usuario.salvar();
 
                                 Toast.makeText(CadastroActivity.this,
-                                        "Usuário cadastrado com sucesso",
-                                        Toast.LENGTH_SHORT).
-                                        show();
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        "Cadastro com sucesso",
+                                        Toast.LENGTH_SHORT).show();
 
+                                startActivity( new Intent(getApplicationContext(), MainActivity.class));
                                 finish();
 
-                            }catch(Exception e){
-                                e.printStackTrace();
-                            }
-
-
-                        }else{
-
-                            progressBarCadastro.setVisibility(View.GONE);
-
-                            String excecao = "";
-                            try {
-                                throw task.getException();
-                            }catch(
-                                    FirebaseAuthWeakPasswordException e){
-                                excecao = "Digite uma senha mais forte";
-                            }catch(
-                                    FirebaseAuthInvalidCredentialsException e){
-                                excecao = "Problemas no endereço de e-mail";
-                            }catch(
-                                    FirebaseAuthUserCollisionException e){
-                                excecao = "Usuário já existente";
                             }catch (Exception e){
-                                excecao = "Erro ao cadastrar usuário " + e.getMessage();
                                 e.printStackTrace();
                             }
 
+
+
+                        }else {
+
+                            progressBar.setVisibility( View.GONE );
+
+                            String erroExcecao = "";
+                            try{
+                                throw task.getException();
+                            }catch (FirebaseAuthWeakPasswordException e){
+                                erroExcecao = "Digite uma senha mais forte!";
+                            }catch (FirebaseAuthInvalidCredentialsException e){
+                                erroExcecao = "Por favor, digite um e-mail válido";
+                            }catch (FirebaseAuthUserCollisionException e){
+                                erroExcecao = "Este conta já foi cadastrada";
+                            } catch (Exception e) {
+                                erroExcecao = "ao cadastrar usuário: "  + e.getMessage();
+                                e.printStackTrace();
+                            }
 
                             Toast.makeText(CadastroActivity.this,
-                                    excecao,
-                                    Toast.LENGTH_SHORT).
-                                    show();
+                                    "Erro: " + erroExcecao ,
+                                    Toast.LENGTH_SHORT).show();
+
+
                         }
+
                     }
-                });
+                }
+        );
+
     }
 
-    public void abrirTelaPrincipal() {
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+    public void inicializarComponentes(){
+
+        campoNome       = findViewById(R.id.editCadastroNome);
+        campoEmail      = findViewById(R.id.editCadastroEmail);
+        campoSenha      = findViewById(R.id.editCadastroSenha);
+        botaoCadastrar  = findViewById(R.id.buttonCadastrar);
+        progressBar     = findViewById(R.id.progressCadastro);
+
+        campoNome.requestFocus();
+
     }
+
 }

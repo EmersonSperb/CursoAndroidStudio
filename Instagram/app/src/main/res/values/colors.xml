@@ -8,8 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryVariant">@color/white</color>
+    <color name="colorOnPrimary">@color/white</color>
     <color name="colorPrimaryDark">#462759</color>
     <color name="colorAccent">#a03d89</color>
+    <color name="colorSecondaryVariant">#a03d89</color>
+    <color name="colorOnSecondary">#a03d89</color>
     <color name="cinza_medio">#dbdbdb</color>
     <color name="cinza_escuro">#3a3a3a</color>
     <color name="roxo">#462759</color>

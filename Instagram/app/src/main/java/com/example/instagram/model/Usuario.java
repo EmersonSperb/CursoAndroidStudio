@@ -1,6 +1,6 @@
 package com.example.instagram.model;
 
-import com.example.instagram.config.ConfiguracaoFirebase;
+import com.example.instagram.helper.ConfiguracaoFirebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 

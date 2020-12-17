@@ -1,41 +1,43 @@
 {
   "project_info": {
-    "project_number": "398937684343",
-    "project_id": "instagram-13a18",
-    "storage_bucket": "instagram-13a18.appspot.com"
+    "project_number": "61481512526",
+    "firebase_url": "https://instagram-17c63-default-rtdb.firebaseio.com",
+    "project_id": "instagram-17c63",
+    "storage_bucket": "instagram-17c63.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:398937684343:android:590db845d8a875d0314972",
+        "mobilesdk_app_id": "1:61481512526:android:bc2e637d798855ede2dd1f",
         "android_client_info": {
           "package_name": "com.example.instagram"
         }
       },
       "oauth_client": [
         {
-          "client_id": "398937684343-eluvge3sunt7ukh46a6gl8k7ouf1hti7.apps.googleusercontent.com",
+          "client_id": "61481512526-rotnjf99pgb7tv7k59u5ml3vikmsbklo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.instagram",
+            "certificate_hash": "ff73cb1c8041837a29e3a3eff74f9e19e183fb64"
+          }
+        },
+        {
+          "client_id": "61481512526-38k8imkc527avcn7gk7dvmenmuofujnm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCEo2JS9g_Dp1KcGxdiBKc_pWDOkD9igNI"
+          "current_key": "AIzaSyAlPWmRv_l3emCC_Or6xYOh9vkowZWVq-U"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "398937684343-eluvge3sunt7ukh46a6gl8k7ouf1hti7.apps.googleusercontent.com",
+              "client_id": "61481512526-38k8imkc527avcn7gk7dvmenmuofujnm.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "398937684343-socosmcgtqbnqusdtlab7ka5uds9hksf.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.instagram"
-              }
             }
           ]
         }
