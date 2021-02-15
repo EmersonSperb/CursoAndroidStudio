@@ -84,7 +84,7 @@ public class PerfilFragment extends Fragment {
         textPublicacoes = view.findViewById(R.id.textPublicacoes);
         textSeguidores = view.findViewById(R.id.textSeguidores);
         textSeguindo = view.findViewById(R.id.textSeguindo);
-        imagePerfil = view.findViewById(R.id.imagePerfil);
+        imagePerfil = view.findViewById(R.id.imageEditarPerfil);
 
         buttonEditarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override

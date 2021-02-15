@@ -2,6 +2,7 @@ package com.example.instagram.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.instagram.R;
 import com.example.instagram.helper.ConfiguracaoFirebase;
+import com.example.instagram.helper.UsuarioFirebase;
 import com.example.instagram.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -58,6 +60,7 @@ public class CadastroActivity extends AppCompatActivity {
                             usuario.setEmail( textoEmail );
                             usuario.setSenha( textosenha );
                             cadastrar( usuario );
+                            Log.i("gravou",usuario.getNome());
 
                         }else{
                             Toast.makeText(CadastroActivity.this,
@@ -100,15 +103,21 @@ public class CadastroActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if( task.isSuccessful() ){
+                            Log.i("cadastro","certo");
 
                             try {
 
-                                progressBar.setVisibility(View.GONE);
+                             progressBar.setVisibility(View.GONE);
 
                                 //Salvar dados no firebase
+
+
                                 String idUsuario = task.getResult().getUser().getUid();
                                 usuario.setId( idUsuario );
                                 usuario.salvar();
+                               //atualizar profile
+                                UsuarioFirebase.atualizanomeusuario(usuario.getNome());
+
 
                                 Toast.makeText(CadastroActivity.this,
                                         "Cadastro com sucesso",

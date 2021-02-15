@@ -15,7 +15,7 @@
     <!-- Tema para tela de login -->
     <style name="AppThemeLogin" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimary">@android:color/darker_gray</item>
         <item name="colorPrimaryDark">@color/roxo</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
