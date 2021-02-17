@@ -58,6 +58,7 @@ public class UsuarioFirebase {
         }else{
             usuario.setCaminhoFoto(firebaseUser.getPhotoUrl().toString());
         }
+        usuario.setNomePesquisa(firebaseUser.getDisplayName().toUpperCase());
 
         return usuario;
 

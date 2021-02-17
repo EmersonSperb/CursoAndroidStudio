@@ -59,6 +59,7 @@ public class CadastroActivity extends AppCompatActivity {
                             usuario.setNome( textoNome );
                             usuario.setEmail( textoEmail );
                             usuario.setSenha( textosenha );
+                            usuario.setNomePesquisa( textoNome.toUpperCase() );
                             cadastrar( usuario );
                             Log.i("gravou",usuario.getNome());
 

@@ -14,6 +14,7 @@ public class Usuario {
     private String email;
     private String senha;
     private String caminhoFoto;
+    private String nomePesquisa;
 
     public Usuario() {
     }
@@ -37,6 +38,7 @@ public class Usuario {
         usuarioMap.put("nome",getNome());
         usuarioMap.put("id",getId());
         usuarioMap.put("caminhoFoto",getCaminhoFoto());
+        usuarioMap.put("nomePesquisa",getNomePesquisa());
 
         return usuarioMap;
     }
@@ -64,12 +66,11 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-
     @Exclude
     public String getSenha() {
         return senha;
     }
-
+    @Exclude
     public void setSenha(String senha) {
         this.senha = senha;
     }
@@ -80,5 +81,13 @@ public class Usuario {
 
     public void setCaminhoFoto(String caminhoFoto) {
         this.caminhoFoto = caminhoFoto;
+    }
+
+    public String getNomePesquisa() {
+        return nomePesquisa;
+    }
+
+    public void setNomePesquisa(String nomePesquisa) {
+        this.nomePesquisa = nomePesquisa;
     }
 }
