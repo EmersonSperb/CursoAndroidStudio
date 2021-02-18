@@ -202,7 +202,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         boolean retorno = UsuarioFirebase.atualizarFotoUsuario(url);
         if (retorno){
-            usuarioLogado.getCaminhoFoto();
+            usuarioLogado.setCaminhoFoto( url.toString() );
             usuarioLogado.atualizar();
 
             Toast.makeText(getApplicationContext(),

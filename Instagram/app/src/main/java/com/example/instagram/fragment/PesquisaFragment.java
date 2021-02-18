@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagram.R;
+import com.example.instagram.adapter.AdapterPesquisa;
 import com.example.instagram.helper.ConfiguracaoFirebase;
 import com.example.instagram.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,8 @@ public class PesquisaFragment extends Fragment {
     private List<Usuario> listaUsuarios;
     private DatabaseReference usuariosRef;
 
+    private AdapterPesquisa adapterPesquisa;
+
     public PesquisaFragment() {
         // Required empty public constructor
     }
@@ -57,6 +61,13 @@ public class PesquisaFragment extends Fragment {
         listaUsuarios = new ArrayList<>();
         usuariosRef = ConfiguracaoFirebase.getFirebase()
                 .child("usuarios");
+
+        adapterPesquisa = new AdapterPesquisa(listaUsuarios,getActivity());
+
+        //configura o RecyclerView
+        recyclerPesquisa.setHasFixedSize(true);
+        recyclerPesquisa.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerPesquisa.setAdapter(adapterPesquisa);
 
         //Configura searchview
         searchViewPesquisa.setQueryHint("Buscar usuários");
@@ -86,7 +97,7 @@ public class PesquisaFragment extends Fragment {
         listaUsuarios.clear();
 
         //Pesquisa usuários caso tenha texto na pesquisa
-        if( texto.length() > 0 ){
+        if( texto.length() >= 2 ){
 
             Query query = usuariosRef.orderByChild("nomePesquisa")
                     .startAt(texto)
@@ -101,8 +112,10 @@ public class PesquisaFragment extends Fragment {
 
                     }
 
-                    int total = listaUsuarios.size();
-                    Log.i("totalUsuarios", "total: " + total );
+                    adapterPesquisa.notifyDataSetChanged();
+
+                    /*int total = listaUsuarios.size();
+                    Log.i("totalUsuarios", "total: " + total );*/
 
                 }
 
