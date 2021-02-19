@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.PerfilAmigoActivity"></activity>
         <activity
             android:name=".activity.CadastroActivity"
             android:theme="@style/AppThemeLogin" />
