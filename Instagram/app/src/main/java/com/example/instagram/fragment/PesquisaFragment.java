@@ -18,6 +18,7 @@ import com.example.instagram.activity.PerfilAmigoActivity;
 import com.example.instagram.adapter.AdapterPesquisa;
 import com.example.instagram.helper.ConfiguracaoFirebase;
 import com.example.instagram.helper.RecyclerItemClickListener;
+import com.example.instagram.helper.UsuarioFirebase;
 import com.example.instagram.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,6 +47,7 @@ public class PesquisaFragment extends Fragment {
     private DatabaseReference usuariosRef;
 
     private AdapterPesquisa adapterPesquisa;
+    private String idUsuarioLogado;
 
     public PesquisaFragment() {
         // Required empty public constructor
@@ -65,6 +67,8 @@ public class PesquisaFragment extends Fragment {
         listaUsuarios = new ArrayList<>();
         usuariosRef = ConfiguracaoFirebase.getFirebase()
                 .child("usuarios");
+
+        idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getId();
 
         adapterPesquisa = new AdapterPesquisa(listaUsuarios,getActivity());
 
@@ -138,15 +142,18 @@ public class PesquisaFragment extends Fragment {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for( DataSnapshot ds : dataSnapshot.getChildren() ){
+                        Usuario usuario = ds.getValue(Usuario.class);
 
-                        listaUsuarios.add( ds.getValue(Usuario.class) );
+                        if (idUsuarioLogado.equals(usuario.getId()))
+                            continue;//para aenas uma linha após o if não é necessário usar as chaves. As chaves são tipo o begin
+                        listaUsuarios.add( usuario );
 
                     }
 
                     adapterPesquisa.notifyDataSetChanged();
 
-                    /*int total = listaUsuarios.size();
-                    Log.i("totalUsuarios", "total: " + total );*/
+                    int total = listaUsuarios.size();
+                    Log.i("totalUsuarios", "total: " + total );
 
                 }
 
@@ -156,6 +163,12 @@ public class PesquisaFragment extends Fragment {
                 }
             });
 
+        }else{
+            listaUsuarios.clear();
+            adapterPesquisa.notifyDataSetChanged();
+
+            int total = listaUsuarios.size();
+            Log.i("totalUsuarios", "total: " + total );
         }
 
     }

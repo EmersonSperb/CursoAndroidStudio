@@ -1,16 +1,27 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
     tools:context=".fragment.PostagemFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/buttonAbrirGaleria"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Postagem"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center|center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="ABRIR GALERIA" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/buttonAbrirCamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="ABRIR CÂMERA" />
+</LinearLayout>

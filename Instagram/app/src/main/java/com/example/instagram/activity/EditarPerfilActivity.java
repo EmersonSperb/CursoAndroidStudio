@@ -1,5 +1,6 @@
 package com.example.instagram.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.bumptech.glide.Glide;
 import com.example.instagram.R;
 import com.example.instagram.helper.ConfiguracaoFirebase;
+import com.example.instagram.helper.Permissao;
 import com.example.instagram.helper.UsuarioFirebase;
 import com.example.instagram.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,10 +48,17 @@ public class EditarPerfilActivity extends AppCompatActivity {
     private StorageReference storageRef;
     private String identificadorUsuario;
 
+    private String[] permissoesNecessarias = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_perfil);
+        //Validar Permissões
+        Permissao.validarPermissoes(permissoesNecessarias,this,1);
 
         usuarioLogado = UsuarioFirebase.getDadosUsuarioLogado();
         storageRef = ConfiguracaoFirebase.getFirebaseStorage();
@@ -213,7 +222,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
     };
 
     public void incializarComponentes(){
-        imageEditarPerfil = findViewById(R.id.imageEditarPerfil);
+        imageEditarPerfil = findViewById(R.id.imagePerfil);
         textAlterarFoto = findViewById(R.id.textAlterarFoto);
         buttonSalvarAlteracoes = findViewById(R.id.buttonSalvarAlteracoes);
         editNomePerfil = findViewById(R.id.editNomePerfil);
