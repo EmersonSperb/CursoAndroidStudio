@@ -40,11 +40,12 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    //Dependências firebase
     //Dependências firebase
     implementation 'com.google.firebase:firebase-core:18.0.2'
     implementation 'com.google.firebase:firebase-database:19.6.0'
@@ -61,6 +62,10 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-storage:6.2.0'
 
     implementation "androidx.multidex:multidex:2.0.1"
+    //Filtros
+    implementation 'info.androidhive:imagefilters:1.0.7'
+    //Carregamento de imagens
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
 }
 apply plugin: 'com.android.application'

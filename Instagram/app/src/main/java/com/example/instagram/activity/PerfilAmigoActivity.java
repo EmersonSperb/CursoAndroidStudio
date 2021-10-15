@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,15 +14,21 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram.R;
+import com.example.instagram.adapter.AdapterGrid;
 import com.example.instagram.helper.ConfiguracaoFirebase;
 import com.example.instagram.helper.UsuarioFirebase;
+import com.example.instagram.model.Postagem;
 import com.example.instagram.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,13 +38,17 @@ public class PerfilAmigoActivity extends AppCompatActivity {
     private Usuario usuarioLogado;
     private Button buttonAcaoPerfil;
     private CircleImageView imagePerfil;
-    private DatabaseReference furebaseRef;
+    private DatabaseReference firebaseRef;
     private DatabaseReference usuariosRef;
     private DatabaseReference usuarioAmigoRef;
     private DatabaseReference usuarioLogadoRef;
     private DatabaseReference seguidoresRef;
+    private DatabaseReference postagensUsuarioRef;
     private ValueEventListener valueEventListenerPerfilAmigo;
     private TextView textPublicacoes,textSeguidores,textSeguindo;
+    private GridView gridViewPerfil;
+    private AdapterGrid adapterGrid;
+
     private String idUsuarioLogado;
 
     @Override
@@ -49,7 +60,7 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
         //Configura toolbar
         Toolbar toolbar = findViewById(R.id.toolbarPrincipal);
-        toolbar.setTitle("Pefil");
+        toolbar.setTitle("Perfil");
         setSupportActionBar( toolbar );
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -60,6 +71,9 @@ public class PerfilAmigoActivity extends AppCompatActivity {
         if( bundle != null ){
             usuarioSelecionado = (Usuario) bundle.getSerializable("usuarioSelecionado");
 
+            postagensUsuarioRef = ConfiguracaoFirebase.getFirebase()
+                    .child("postagens")
+                    .child(usuarioSelecionado.getId());
             //Configura nome do usuário na toolbar
             getSupportActionBar().setTitle( usuarioSelecionado.getNome() );
             //Recuperar foto do usuário
@@ -73,8 +87,42 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
         }
 
+        inicializarImageLoader();
+        carregarFotosPostagem();
         recuperarDadosUsuarioLogado();
 
+    }
+
+    public void inicializarImageLoader(){
+        // Create global configuration and initialize ImageLoader with this config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
+			.build();
+        ImageLoader.getInstance().init(config);
+    }
+
+    public void carregarFotosPostagem(){
+
+        postagensUsuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> urlFotos = new ArrayList<>();
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    Postagem postagem = ds.getValue(Postagem.class);
+                    //Log.i("postagem","url" + postagem.getCaminhofoto());
+                    urlFotos.add(postagem.getCaminhofoto());
+                }
+                int qtdePostagem = urlFotos.size();
+                textPublicacoes.setText(String.valueOf(qtdePostagem));
+                //configurar adapter
+                adapterGrid = new AdapterGrid(getApplicationContext(),R.layout.grid_postagem,urlFotos);
+                gridViewPerfil.setAdapter(adapterGrid);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void recuperarDadosUsuarioLogado(){
@@ -202,11 +250,11 @@ public class PerfilAmigoActivity extends AppCompatActivity {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                        Usuario usuario = snapshot.getValue(Usuario.class);
-                       String postagens = String.valueOf(usuario.getPostagens());
+                       //String postagens = String.valueOf(usuario.getPostagens());
                        String seguidores = String.valueOf(usuario.getSeguidores());
                        String seguindo = String.valueOf(usuario.getSeguindo());
 
-                       textPublicacoes.setText(postagens);
+                       //textPublicacoes.setText(postagens);
                        textSeguidores.setText(seguidores);
                        textSeguindo.setText(seguindo);
                    }
@@ -224,14 +272,16 @@ public class PerfilAmigoActivity extends AppCompatActivity {
         buttonAcaoPerfil.setText("Carregando");
         imagePerfil = findViewById(R.id.imagePerfil);
         //Referências a usuários
-        furebaseRef = ConfiguracaoFirebase.getFirebase();
-        usuariosRef = furebaseRef.child("usuarios");
-        seguidoresRef = furebaseRef.child("seguidores");
+        firebaseRef = ConfiguracaoFirebase.getFirebase();
+        usuariosRef = firebaseRef.child("usuarios");
+        seguidoresRef = firebaseRef.child("seguidores");
         idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getId();
         textPublicacoes = findViewById(R.id.textPublicacoes);
         textSeguidores = findViewById(R.id.textSeguidores);
         textSeguindo = findViewById(R.id.textSeguindo);
         imagePerfil = findViewById(R.id.imagePerfil);
+        gridViewPerfil = findViewById(R.id.gridViewPerfil);
+
     }
 
     @Override

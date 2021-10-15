@@ -14,6 +14,7 @@ import android.widget.Button;
 import androidx.fragment.app.Fragment;
 
 import com.example.instagram.R;
+import com.example.instagram.activity.FiltroActivity;
 import com.example.instagram.helper.Permissao;
 
 import java.io.ByteArrayOutputStream;
@@ -126,7 +127,7 @@ public class PostagemFragment extends Fragment {
                         break;
                     case SELECAO_GALERIA:
                         Uri localImagemSelecionada = data.getData();
-                        imagem = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(localImagemSelecionada));
+                        imagem = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),localImagemSelecionada);
                         break;
                 }
                 if (imagem != null){
@@ -134,6 +135,11 @@ public class PostagemFragment extends Fragment {
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     imagem.compress(Bitmap.CompressFormat.JPEG,75,baos);
                     byte[] dadosImagem = baos.toByteArray();
+
+                    //Envia imagem escolhida para a aplicação do filtro
+                    Intent i = new Intent(getActivity(), FiltroActivity.class);
+                    i.putExtra("fotoEscolhida",dadosImagem);
+                    startActivity(i);
                 }
             }
                 catch(Exception e){
