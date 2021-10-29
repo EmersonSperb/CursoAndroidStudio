@@ -17,7 +17,7 @@ public class Postagem {
     private String id;
     private String idUsuario;
     private String descricao;
-    private String caminhofoto;
+    private String caminhoFoto;
 
     public Postagem(){
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
@@ -42,7 +42,7 @@ public class Postagem {
         this.id = id;
         this.idUsuario = idUsuario;
         this.descricao = descricao;
-        this.caminhofoto = caminhofoto;
+        this.caminhoFoto = caminhoFoto;
     }
 
     public String getId() {
@@ -69,11 +69,11 @@ public class Postagem {
         this.descricao = descricao;
     }
 
-    public String getCaminhofoto() {
-        return caminhofoto;
+    public String getCaminhoFoto() {
+        return caminhoFoto;
     }
 
-    public void setCaminhofoto(String caminhofoto) {
-        this.caminhofoto = caminhofoto;
+    public void setCaminhoFoto(String caminhofoto) {
+        this.caminhoFoto = caminhofoto;
     }
 }

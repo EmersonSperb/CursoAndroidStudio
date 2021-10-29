@@ -194,7 +194,7 @@ public class FiltroActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Uri> task) {
 
                         Uri url = task.getResult();
-                        postagem.setCaminhofoto(url.toString());
+                        postagem.setCaminhoFoto(url.toString());
                         //Salvar postagem
                         if (postagem.salvar()){
                             Toast.makeText(FiltroActivity.this,

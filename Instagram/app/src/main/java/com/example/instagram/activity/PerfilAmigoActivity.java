@@ -23,6 +23,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -38,6 +40,10 @@ public class PerfilAmigoActivity extends AppCompatActivity {
     private Usuario usuarioLogado;
     private Button buttonAcaoPerfil;
     private CircleImageView imagePerfil;
+    private TextView textPublicacoes, textSeguidores, textSeguindo;
+    private GridView gridViewPerfil;
+    private AdapterGrid adapterGrid;
+
     private DatabaseReference firebaseRef;
     private DatabaseReference usuariosRef;
     private DatabaseReference usuarioAmigoRef;
@@ -45,9 +51,6 @@ public class PerfilAmigoActivity extends AppCompatActivity {
     private DatabaseReference seguidoresRef;
     private DatabaseReference postagensUsuarioRef;
     private ValueEventListener valueEventListenerPerfilAmigo;
-    private TextView textPublicacoes,textSeguidores,textSeguindo;
-    private GridView gridViewPerfil;
-    private AdapterGrid adapterGrid;
 
     private String idUsuarioLogado;
 
@@ -55,6 +58,11 @@ public class PerfilAmigoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil_amigo);
+
+        firebaseRef = ConfiguracaoFirebase.getFirebase();
+        usuariosRef = firebaseRef.child("usuarios");
+        seguidoresRef = firebaseRef.child("seguidores");
+        idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getId();
 
         inicializarComponentes();
 
@@ -87,43 +95,62 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
         }
 
+        //Inicializar image loader
         inicializarImageLoader();
+
         carregarFotosPostagem();
-        recuperarDadosUsuarioLogado();
 
     }
 
     public void inicializarImageLoader(){
         // Create global configuration and initialize ImageLoader with this config
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this)
-			.build();
-        ImageLoader.getInstance().init(config);
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration
+                .Builder(this)
+                .memoryCache(new LruMemoryCache(2 * 1024 * 1024))
+                .memoryCacheSize(2 * 1024 * 1024)
+                .diskCacheSize(50 * 1024 * 1024)
+                .diskCacheFileCount(100)
+                .diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
+                .build();
+        ImageLoader.getInstance().init( config );
     }
 
     public void carregarFotosPostagem(){
 
+        //Recupera as fotos postadas pelo usuario
         postagensUsuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //Configurar o tamanho do grid
+                int tamanhoGrid = getResources().getDisplayMetrics().widthPixels;
+                int tamanhoImagem = tamanhoGrid / 3;
+                gridViewPerfil.setColumnWidth( tamanhoImagem );
+
                 List<String> urlFotos = new ArrayList<>();
-                for (DataSnapshot ds:snapshot.getChildren()){
-                    Postagem postagem = ds.getValue(Postagem.class);
-                    //Log.i("postagem","url" + postagem.getCaminhofoto());
-                    urlFotos.add(postagem.getCaminhofoto());
+                for( DataSnapshot ds: dataSnapshot.getChildren() ){
+                    Postagem postagem = ds.getValue( Postagem.class );
+                    urlFotos.add( postagem.getCaminhoFoto() );
+                    Log.i("postagem", "url:" + postagem.getCaminhoFoto() );
                 }
-                int qtdePostagem = urlFotos.size();
-                textPublicacoes.setText(String.valueOf(qtdePostagem));
-                //configurar adapter
-                adapterGrid = new AdapterGrid(getApplicationContext(),R.layout.grid_postagem,urlFotos);
-                gridViewPerfil.setAdapter(adapterGrid);
+
+                int qtdPostagem = urlFotos.size();
+                textPublicacoes.setText( String.valueOf(qtdPostagem) );
+
+                //Configurar adapter
+                adapterGrid = new AdapterGrid(getApplicationContext(), R.layout.grid_postagem, urlFotos );
+                gridViewPerfil.setAdapter( adapterGrid );
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+
     }
+
 
     private void recuperarDadosUsuarioLogado(){
 
@@ -231,9 +258,10 @@ public class PerfilAmigoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        //Recuperar dados do amigo selecionado
         recuperarDadosPerfilAmigo();
 
+        //Recuperar dados usuario logado
         recuperarDadosUsuarioLogado();
     }
 
@@ -272,14 +300,10 @@ public class PerfilAmigoActivity extends AppCompatActivity {
         buttonAcaoPerfil.setText("Carregando");
         imagePerfil = findViewById(R.id.imagePerfil);
         //Referências a usuários
-        firebaseRef = ConfiguracaoFirebase.getFirebase();
-        usuariosRef = firebaseRef.child("usuarios");
-        seguidoresRef = firebaseRef.child("seguidores");
-        idUsuarioLogado = UsuarioFirebase.getDadosUsuarioLogado().getId();
         textPublicacoes = findViewById(R.id.textPublicacoes);
         textSeguidores = findViewById(R.id.textSeguidores);
         textSeguindo = findViewById(R.id.textSeguindo);
-        imagePerfil = findViewById(R.id.imagePerfil);
+        //imagePerfil = findViewById(R.id.imagePerfil);
         gridViewPerfil = findViewById(R.id.gridViewPerfil);
 
     }
