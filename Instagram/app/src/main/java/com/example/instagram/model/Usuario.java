@@ -15,10 +15,10 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private String caminhoFoto;
-    private String nomePesquisa;
     private int seguidores = 0;
     private int seguindo = 0;
     private int postagens = 0;
+    private String nomePesquisa;
 
     public Usuario() {
     }
@@ -29,25 +29,44 @@ public class Usuario implements Serializable {
         usuariosRef.setValue( this );
     }
 
-    public void atualizar(){
+    public void atualizarQtdPostagem(){
+
         DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
-        DatabaseReference usuariosRef = firebaseRef.child("usuarios").child( getId() );
-        Map<String,Object> valoresUsuario = converterParaMap();
-        usuariosRef.updateChildren ( valoresUsuario );
+        DatabaseReference usuariosRef = firebaseRef
+                .child("usuarios")
+                .child( getId() );
+
+        HashMap<String, Object> dados = new HashMap<>();
+        dados.put("postagens", getPostagens() );
+
+        usuariosRef.updateChildren( dados );
+
     }
 
-    public Map<String,Object> converterParaMap(){
-        HashMap<String,Object> usuarioMap = new HashMap<>();
-        usuarioMap.put("email",getEmail());
-        usuarioMap.put("nome",getNome());
-        usuarioMap.put("id",getId());
-        usuarioMap.put("caminhoFoto",getCaminhoFoto());
-        usuarioMap.put("nomePesquisa",getNomePesquisa());
-        usuarioMap.put("seguidores",getSeguidores());
-        usuarioMap.put("seguindo",getSeguindo());
-        usuarioMap.put("postagens",getPostagens());
+    public void atualizar(){
+
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+        DatabaseReference usuariosRef = firebaseRef
+                .child("usuarios")
+                .child( getId() );
+        Map<String, Object> valoresUsuario = converterParaMap();
+        usuariosRef.updateChildren( valoresUsuario );
+
+    }
+
+    public Map<String, Object> converterParaMap(){
+
+        HashMap<String, Object> usuarioMap = new HashMap<>();
+        usuarioMap.put("email", getEmail() );
+        usuarioMap.put("nome", getNome() );
+        usuarioMap.put("id", getId() );
+        usuarioMap.put("caminhoFoto", getCaminhoFoto() );
+        usuarioMap.put("seguidores", getSeguidores() );
+        usuarioMap.put("seguindo", getSeguindo() );
+        usuarioMap.put("postagens", getPostagens() );
 
         return usuarioMap;
+
     }
 
     public int getSeguidores() {
@@ -87,7 +106,7 @@ public class Usuario implements Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = nome.toUpperCase();
     }
 
     public String getEmail() {
@@ -97,11 +116,12 @@ public class Usuario implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
     @Exclude
     public String getSenha() {
         return senha;
     }
-    @Exclude
+
     public void setSenha(String senha) {
         this.senha = senha;
     }

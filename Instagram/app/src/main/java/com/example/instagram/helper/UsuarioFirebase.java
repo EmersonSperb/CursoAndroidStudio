@@ -18,6 +18,10 @@ public class UsuarioFirebase {
         return usuario.getCurrentUser();
     }
 
+    public static String getIdentificadorUsuario(){
+        return getUsuarioAtual().getUid();
+    }
+
     public static void atualizanomeusuario(String nome) {
         try {
              //Usuário logado no App
@@ -86,4 +90,6 @@ public class UsuarioFirebase {
 
 
     }
+
+
 }

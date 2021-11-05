@@ -1,9 +1,11 @@
 package com.example.instagram.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -54,6 +56,8 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
     private String idUsuarioLogado;
 
+    private List<Postagem> postagens;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +104,20 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
         carregarFotosPostagem();
 
+        gridViewPerfil.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Postagem postagem = postagens.get( position );
+                Intent i = new Intent(getApplicationContext(), VisualizarPostagemActivity.class );
+
+                i.putExtra("postagem", postagem );
+                i.putExtra("usuario", usuarioSelecionado );
+
+                startActivity( i );
+            }
+        });
+
     }
 
     public void inicializarImageLoader(){
@@ -117,6 +135,7 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
     public void carregarFotosPostagem(){
 
+        postagens = new ArrayList<>();
         //Recupera as fotos postadas pelo usuario
         postagensUsuarioRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -130,12 +149,13 @@ public class PerfilAmigoActivity extends AppCompatActivity {
                 List<String> urlFotos = new ArrayList<>();
                 for( DataSnapshot ds: dataSnapshot.getChildren() ){
                     Postagem postagem = ds.getValue( Postagem.class );
+                    postagens.add(postagem);
                     urlFotos.add( postagem.getCaminhoFoto() );
                     Log.i("postagem", "url:" + postagem.getCaminhoFoto() );
                 }
 
-                int qtdPostagem = urlFotos.size();
-                textPublicacoes.setText( String.valueOf(qtdPostagem) );
+                /*int qtdPostagem = urlFotos.size();
+                textPublicacoes.setText( String.valueOf(qtdPostagem) );*/
 
                 //Configurar adapter
                 adapterGrid = new AdapterGrid(getApplicationContext(), R.layout.grid_postagem, urlFotos );
@@ -175,8 +195,8 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
     private void verificaSegueUsuarioAmigo(){
        DatabaseReference seguidorRef = seguidoresRef.
-               child(idUsuarioLogado)
-               .child(usuarioSelecionado.getId());
+               child(usuarioSelecionado.getId())
+               .child(idUsuarioLogado);
 
        seguidorRef.addListenerForSingleValueEvent(
                new ValueEventListener() {
@@ -201,20 +221,20 @@ public class PerfilAmigoActivity extends AppCompatActivity {
 
     private void salvarSeguidor(Usuario uLogado, Usuario uAmigo){
         /*seguidores
-              idlogado
-                 idseguindo
+              idSeguindo
+                 idLogado
                     dados seguindo
         * */
 
 
-        HashMap<String, Object> dadosAmigo = new HashMap<>();
-        dadosAmigo.put("nome",uAmigo.getNome());
-        dadosAmigo.put("caminhoFoto",uAmigo.getCaminhoFoto());
+        HashMap<String, Object> dadosUsuarioLogado = new HashMap<>();
+        dadosUsuarioLogado.put("nome",uLogado.getNome());
+        dadosUsuarioLogado.put("caminhoFoto",uLogado.getCaminhoFoto());
 
         DatabaseReference seguidorRef = seguidoresRef
-                .child(uLogado.getId())
-                .child(uAmigo.getId());
-                seguidorRef.setValue(dadosAmigo);
+                .child(uAmigo.getId())
+                .child(uLogado.getId());
+                seguidorRef.setValue(dadosUsuarioLogado);
 
                 buttonAcaoPerfil.setText("Seguindo");
                 buttonAcaoPerfil.setOnClickListener(null);
@@ -278,11 +298,12 @@ public class PerfilAmigoActivity extends AppCompatActivity {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                        Usuario usuario = snapshot.getValue(Usuario.class);
-                       //String postagens = String.valueOf(usuario.getPostagens());
+
+                       String postagens = String.valueOf(usuario.getPostagens());
                        String seguidores = String.valueOf(usuario.getSeguidores());
                        String seguindo = String.valueOf(usuario.getSeguindo());
 
-                       //textPublicacoes.setText(postagens);
+                       textPublicacoes.setText(postagens);
                        textSeguidores.setText(seguidores);
                        textSeguindo.setText(seguindo);
                    }
