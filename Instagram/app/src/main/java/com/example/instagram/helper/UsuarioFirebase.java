@@ -13,83 +13,89 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class UsuarioFirebase {
+
     public static FirebaseUser getUsuarioAtual(){
+
         FirebaseAuth usuario = ConfiguracaoFirebase.getFirebaseAutenticacao();
         return usuario.getCurrentUser();
+
     }
 
     public static String getIdentificadorUsuario(){
         return getUsuarioAtual().getUid();
     }
 
-    public static void atualizanomeusuario(String nome) {
+    public static void atualizarNomeUsuario(String nome){
+
         try {
-             //Usuário logado no App
+
+            //Usuario logado no App
             FirebaseUser usuarioLogado = getUsuarioAtual();
+
             //Configurar objeto para alteração do perfil
             UserProfileChangeRequest profile = new UserProfileChangeRequest
                     .Builder()
-                    .setDisplayName(nome)
+                    .setDisplayName( nome )
                     .build();
-            usuarioLogado.updateProfile(profile).
-                    addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                           @Override
-                                                                           public void onComplete(@NonNull Task<Void> task) {
-                                                                               if (!task.isSuccessful()){
-                                                                                   Log.d("Perfil","Erro ao atualizar nome do perfil");
-                                                                               }
+            usuarioLogado.updateProfile( profile ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if( !task.isSuccessful() ){
+                        Log.d("Perfil","Erro ao atualizar nome de perfil." );
+                    }
+                }
+            });
 
-                                                                           }
-                                                                       }
-            );
-
-
-
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    public static void atualizarFotoUsuario(Uri url){
+
+        try {
+
+            //Usuario logado no App
+            FirebaseUser usuarioLogado = getUsuarioAtual();
+
+            //Configurar objeto para alteração do perfil
+            UserProfileChangeRequest profile = new UserProfileChangeRequest
+                    .Builder()
+                    .setPhotoUri( url )
+                    .build();
+            usuarioLogado.updateProfile( profile ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if( !task.isSuccessful() ){
+                        Log.d("Perfil","Erro ao atualizar a foto de perfil." );
+                    }
+                }
+            });
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public static Usuario getDadosUsuarioLogado(){
 
         FirebaseUser firebaseUser = getUsuarioAtual();
-        Usuario  usuario = new Usuario();
-        usuario.setEmail(firebaseUser.getEmail());
-        usuario.setNome(firebaseUser.getDisplayName());
-        usuario.setId(firebaseUser.getUid());
-        if (firebaseUser.getPhotoUrl() == null ){
+
+        Usuario usuario = new Usuario();
+        usuario.setEmail( firebaseUser.getEmail() );
+        usuario.setNome( firebaseUser.getDisplayName() );
+        usuario.setId( firebaseUser.getUid() );
+
+        if ( firebaseUser.getPhotoUrl() == null ){
             usuario.setCaminhoFoto("");
         }else{
-            usuario.setCaminhoFoto(firebaseUser.getPhotoUrl().toString());
+            usuario.setCaminhoFoto( firebaseUser.getPhotoUrl().toString() );
         }
-        usuario.setNomePesquisa(firebaseUser.getDisplayName().toUpperCase());
 
         return usuario;
 
     }
-
-    public static boolean atualizarFotoUsuario(Uri url){
-        try {
-            FirebaseUser user = getUsuarioAtual();
-            UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder().setPhotoUri(url).build();
-            user.updateProfile(profile).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-                    if (!task.isSuccessful()) {
-
-                        Log.d("Perfil","Erro ao atualizar foto do perfil.");
-                    }
-                }
-            });
-            return true;
-        }catch(Exception e){
-            e.printStackTrace();
-            return false;
-
-        }
-
-
-    }
-
 
 }

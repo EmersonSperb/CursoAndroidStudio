@@ -284,7 +284,7 @@ public class FiltroActivity extends AppCompatActivity {
                         usuarioLogado.setPostagens( qtdPostagem );
                         usuarioLogado.atualizarQtdPostagem();
                         //Salvar postagem
-                        if( postagem.salvar() ){
+                        if( postagem.salvar(seguidoresSnapshot) ){
                             Toast.makeText(FiltroActivity.this,
                                     "Sucesso ao salvar postagem!",
                                     Toast.LENGTH_SHORT).show();

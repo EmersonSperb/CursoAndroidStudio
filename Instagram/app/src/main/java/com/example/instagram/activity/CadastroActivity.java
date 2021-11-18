@@ -117,7 +117,7 @@ public class CadastroActivity extends AppCompatActivity {
                                 usuario.setId( idUsuario );
                                 usuario.salvar();
                                //atualizar profile
-                                UsuarioFirebase.atualizanomeusuario(usuario.getNome());
+                                UsuarioFirebase.atualizarNomeUsuario(usuario.getNome());
 
 
                                 Toast.makeText(CadastroActivity.this,

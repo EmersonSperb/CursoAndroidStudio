@@ -1,20 +1,21 @@
 {
   "project_info": {
-    "project_number": "466970839952",
-    "project_id": "instagram-curso-72973",
-    "storage_bucket": "instagram-curso-72973.appspot.com"
+    "project_number": "764741649793",
+    "firebase_url": "https://instagramcurso-5aca8-default-rtdb.firebaseio.com",
+    "project_id": "instagramcurso-5aca8",
+    "storage_bucket": "instagramcurso-5aca8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:466970839952:android:a74539dfd6ba6c9ef80115",
+        "mobilesdk_app_id": "1:764741649793:android:d279f7080fe78121419480",
         "android_client_info": {
           "package_name": "com.example.instagram"
         }
       },
       "oauth_client": [
         {
-          "client_id": "466970839952-d583plb957o7nvn33s0rg1g8dpj0l73e.apps.googleusercontent.com",
+          "client_id": "764741649793-s4lgieuohub29pfgdmgvbr6gto964ktc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.instagram",
@@ -22,20 +23,20 @@
           }
         },
         {
-          "client_id": "466970839952-0s8bsecmbvqeg256ncremmrdtss12hmm.apps.googleusercontent.com",
+          "client_id": "764741649793-pjsibcfcvqpjth79t74lnpkbfmvmmnfp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDqYD0gsx4DMotUMLI8REWFi1VTLyq8-98"
+          "current_key": "AIzaSyA8vAxlcnxaFocuXrIJojryErRICS2VMWM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "466970839952-0s8bsecmbvqeg256ncremmrdtss12hmm.apps.googleusercontent.com",
+              "client_id": "764741649793-pjsibcfcvqpjth79t74lnpkbfmvmmnfp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
