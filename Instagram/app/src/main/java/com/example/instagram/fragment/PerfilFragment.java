@@ -76,15 +76,6 @@ public class PerfilFragment extends Fragment {
         //Configurações dos componentes
         inicializarComponentes(view);
 
-        //Recuperar foto do usuário
-        String caminhoFoto = usuarioLogado.getCaminhoFoto();
-        if( caminhoFoto != null ){
-            Uri url = Uri.parse( caminhoFoto );
-            Glide.with(getActivity())
-                    .load( url )
-                    .into( imagePerfil );
-        }
-
         //Abre edição de perfil
         buttonAcaoPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,12 +167,12 @@ public class PerfilFragment extends Fragment {
 
                         Usuario usuario = dataSnapshot.getValue( Usuario.class );
 
-                        //String postagens = String.valueOf( usuario.getPostagens() );
+                        String postagens = String.valueOf( usuario.getPostagens() );
                         String seguindo = String.valueOf( usuario.getSeguindo() );
                         String seguidores = String.valueOf( usuario.getSeguidores() );
 
                         //Configura valores recuperados
-                        //textPublicacoes.setText( postagens );
+                        textPublicacoes.setText( postagens );
                         textSeguidores.setText( seguidores );
                         textSeguindo.setText( seguindo );
 
@@ -196,12 +187,30 @@ public class PerfilFragment extends Fragment {
 
     }
 
+
+    private void recuperarFotoUsuario(){
+
+        usuarioLogado = UsuarioFirebase.getDadosUsuarioLogado();
+
+        //Recuperar foto do usuário
+        String caminhoFoto = usuarioLogado.getCaminhoFoto();
+        if( caminhoFoto != null ){
+            Uri url = Uri.parse( caminhoFoto );
+            Glide.with(getActivity())
+                    .load( url )
+                    .into( imagePerfil );
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
 
         //Recuperar dados do usuario logado
         recuperarDadosUsuarioLogado();
+
+        //Recuperar foto usuário
+        recuperarFotoUsuario();
 
     }
 

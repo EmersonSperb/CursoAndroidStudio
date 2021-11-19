@@ -76,7 +76,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
 
         //Recuperar dados do usuário
         FirebaseUser usuarioPerfil = UsuarioFirebase.getUsuarioAtual();
-        editNomePerfil.setText( usuarioPerfil.getDisplayName().toUpperCase() );
+        editNomePerfil.setText( usuarioPerfil.getDisplayName() );
         editEmailPerfil.setText( usuarioPerfil.getEmail() );
 
         Uri url = usuarioPerfil.getPhotoUrl();
@@ -105,6 +105,7 @@ public class EditarPerfilActivity extends AppCompatActivity {
                 Toast.makeText(EditarPerfilActivity.this,
                         "Dados alterados com sucesso!",
                         Toast.LENGTH_SHORT).show();
+                //finish();
 
             }
         });
@@ -179,10 +180,9 @@ public class EditarPerfilActivity extends AppCompatActivity {
                                     Toast.makeText(EditarPerfilActivity.this,
                                             "Sucesso ao fazer upload da imagem",
                                             Toast.LENGTH_SHORT).show();
+                                    //finish();
                                 }
                             });
-
-
                         }
                     });
 

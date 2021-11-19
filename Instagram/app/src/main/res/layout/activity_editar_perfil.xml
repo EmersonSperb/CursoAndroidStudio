@@ -32,37 +32,37 @@
             android:textColor="@color/azulEscuro"
             android:textStyle="bold" />
 
-        <TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editNomePerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_perfil_preto_24dp"
                 android:drawableTint="@android:color/darker_gray"
-                android:hint="Nome usuÃ¡rio" />
-        </TextInputLayout>
+                android:hint="Nome usuário" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editEmailPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:drawableTint="@android:color/darker_gray"
                 android:hint="Email" />
-        </TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/buttonSalvarAlteracoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar alteraÃ§Ãµes" />
+            android:text="Salvar Alterações" />
 
     </LinearLayout>
 
