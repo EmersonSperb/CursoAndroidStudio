@@ -22,16 +22,18 @@ public interface YoutubeService {
     &maxResults=20
     &key=AIzaSyB4a8iuFR3LOuqVbfm7edH9kBKyNX4eoBQ
     &channelId=UCVHFbqXqoYvEWM1Ddxl0QDg
+    &q=desevolvimento+android
 
     * */
 
     @GET("search")
     Call<Resultado> recuperarVideos(
-                    @Query("part") String part,
-                    @Query("order") String order,
-                    @Query("maxResults") String maxResults,
-                    @Query("key") String key,
-                    @Query("channelId") String channelId
+            @Query("part") String part,
+            @Query("order") String order,
+            @Query("maxResults") String maxResults,
+            @Query("key") String key,
+            @Query("channelId") String channelId,
+            @Query("q") String q
     );
 
 }

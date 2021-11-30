@@ -37,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
     //Widgets
     private RecyclerView recyclerVideos;
-
-    //private List<Video> videos = new ArrayList<>();
-    private List<Item> videos = new ArrayList<>();
-    private AdapterVideo adapterVideo;
     private MaterialSearchView searchView;
+
+    private List<Item> videos = new ArrayList<>();
+    private Resultado resultado;
+    private AdapterVideo adapterVideo;
+
     //Retrofit
     private Retrofit retrofit;
 
@@ -57,18 +58,21 @@ public class MainActivity extends AppCompatActivity {
         //Configurações iniciais
         retrofit = RetrofitConfig.getRetrofit();
 
+
         //Configura toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Youtube");
         setSupportActionBar( toolbar );
 
+        //Recupera vídeos
+        recuperarVideos("");
 
-        recuperarVideos();
-
+        //Configura métodos para SearchView
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                recuperarVideos( query );
+                return true;
             }
 
             @Override
@@ -85,32 +89,29 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSearchViewClosed() {
-
+                recuperarVideos("");
             }
         });
 
     }
 
-    private void recuperarVideos(){
+    private void recuperarVideos(String pesquisa){
 
-        /*Video video1 = new Video();
-        video1.setTitulo("Vídeo 1 muito interessante!");
-        videos.add( video1 );
-
-        Video video2 = new Video();
-        video2.setTitulo("Vídeo 2 muito interessante!");
-        videos.add( video2 );*/
-
-
+        String q = pesquisa.replaceAll(" ", "+");
         YoutubeService youtubeService = retrofit.create( YoutubeService.class );
 
         youtubeService.recuperarVideos(
                 "snippet", "date", "20",
-                YoutubeConfig.CHAVE_YOUTUBE_API, YoutubeConfig.CANAL_ID
+                YoutubeConfig.CHAVE_YOUTUBE_API, YoutubeConfig.CANAL_ID, q
         ).enqueue(new Callback<Resultado>() {
             @Override
             public void onResponse(Call<Resultado> call, Response<Resultado> response) {
                 Log.d("resultado", "resultado: " + response.toString() );
+                if( response.isSuccessful() ){
+                    resultado = response.body();
+                    videos = resultado.items;
+                    configurarRecyclerView();
+                }
             }
 
             @Override
@@ -162,11 +163,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
+        inflater.inflate(R.menu.menu_main, menu);
 
         MenuItem item = menu.findItem(R.id.menu_search);
-        searchView.setMenuItem(item);
+        searchView.setMenuItem( item );
 
         return true;
     }
