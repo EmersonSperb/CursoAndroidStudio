@@ -1,9 +1,5 @@
 package com.example.youtube.model;
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class Video {
 
     private String titulo="";

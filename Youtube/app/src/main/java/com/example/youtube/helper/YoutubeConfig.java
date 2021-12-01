@@ -1,9 +1,5 @@
 package com.example.youtube.helper;
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class YoutubeConfig {
 
     public static String CANAL_ID = "UCVHFbqXqoYvEWM1Ddxl0QDg";

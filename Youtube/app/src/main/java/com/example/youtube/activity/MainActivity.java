@@ -23,6 +23,7 @@ import com.example.youtube.helper.YoutubeConfig;
 import com.example.youtube.listener.RecyclerItemClickListener;
 import com.example.youtube.model.Item;
 import com.example.youtube.model.Resultado;
+import com.example.youtube.model.Video;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         YoutubeService youtubeService = retrofit.create( YoutubeService.class );
 
         youtubeService.recuperarVideos(
-                "snippet", "date", "20",
+                "snippet", "date", "50",
                 YoutubeConfig.CHAVE_YOUTUBE_API, YoutubeConfig.CANAL_ID, q
         ).enqueue(new Callback<Resultado>() {
             @Override
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 Item video = videos.get(position);
                                 String idVideo = video.id.videoId;
-
+//Log.i("idVideo",idVideo);
                                 Intent i = new Intent(MainActivity.this, PlayerActivity.class);
                                 i.putExtra("idVideo", idVideo );
                                 startActivity(i);

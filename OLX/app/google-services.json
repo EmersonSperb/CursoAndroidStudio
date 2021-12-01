@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "720066066879",
+    "project_id": "olxcursoandroid-4d4ab",
+    "storage_bucket": "olxcursoandroid-4d4ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720066066879:android:cd6bf87e6aa0bd7b91090a",
+        "android_client_info": {
+          "package_name": "com.emerson.cursoandroid.olx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720066066879-rktrn2iq81jmcfbddgfeanl54lc8g5v4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emerson.cursoandroid.olx",
+            "certificate_hash": "ff73cb1c8041837a29e3a3eff74f9e19e183fb64"
+          }
+        },
+        {
+          "client_id": "720066066879-t1vb1als65b9afqmifch5umofvesg901.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyO579Rt3nUUFA96qtiSybVrZpqqMSrWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720066066879-t1vb1als65b9afqmifch5umofvesg901.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

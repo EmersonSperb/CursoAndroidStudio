@@ -1,13 +1,14 @@
 package com.example.youtube.activity;
 
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.youtube.R;
+import com.example.youtube.helper.YoutubeConfig;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.example.youtube.helper.YoutubeConfig;
 
 public class PlayerActivity extends YouTubeBaseActivity
         implements YouTubePlayer.OnInitializedListener {
