@@ -16,12 +16,12 @@ import com.example.navigationdrawer.R;
 
 public class ShareFragment extends Fragment {
 
-    private ShareViewModel shareViewModel;
+    private com.example.navigationdrawer.ui.share.ShareViewModel shareViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         shareViewModel =
-                ViewModelProviders.of(this).get(ShareViewModel.class);
+                ViewModelProviders.of(this).get(com.example.navigationdrawer.ui.share.ShareViewModel.class);
         View root = inflater.inflate(R.layout.fragment_share, container, false);
         final TextView textView = root.findViewById(R.id.text_share);
         shareViewModel.getText().observe(this, new Observer<String>() {
