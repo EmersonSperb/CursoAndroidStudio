@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">UberCursoAndroid</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="titulo_login">Login</string>
+    <string name="titulo_cadastro">Cadastro</string>
+    <string name="title_activity_passageiro">PassageiroActivity</string>
+</resources>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "211034282298",
+    "project_id": "ubercursoandroid",
+    "storage_bucket": "ubercursoandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:211034282298:android:1cb62a5987e499b1c55803",
+        "android_client_info": {
+          "package_name": "com.emerson.cursoandroid.ubercursoandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "211034282298-tm2ivngo82g1qk6gnt07v4eijsba0bhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emerson.cursoandroid.ubercursoandroid",
+            "certificate_hash": "ff73cb1c8041837a29e3a3eff74f9e19e183fb64"
+          }
+        },
+        {
+          "client_id": "211034282298-i5ur4i921m112ho54uahou92s0h86j5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDFT0KY7Ig8mhBilC0tZH-bK0JdtCoRYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "211034282298-i5ur4i921m112ho54uahou92s0h86j5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

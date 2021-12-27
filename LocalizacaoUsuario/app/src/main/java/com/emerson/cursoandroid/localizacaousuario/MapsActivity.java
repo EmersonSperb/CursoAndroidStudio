@@ -1,9 +1,4 @@
 package com.emerson.cursoandroid.localizacaousuario;
-
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -16,6 +11,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -68,6 +67,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Objeto responsável por gerenciar a localização do usuário
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
+        /*locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Log.d("Localizacao", "onLocationChanged: " + location.toString());
+
+                Double latitude = location.getLatitude();
+                Double longitude = location.getLongitude();
+
+                //-23.593054, -46.663584
+                //-23.590679, -46.652288
+                mMap.clear();
+                LatLng localUsuario = new LatLng(latitude, longitude);
+                mMap.addMarker(new MarkerOptions().position(localUsuario).title("Meu local"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localUsuario, 15));
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };*/
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -78,10 +109,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 //-23.593054, -46.663584
                 //-23.590679, -46.652288
-                mMap.clear();
-                LatLng localUsuario = new LatLng(latitude, longitude);
-                mMap.addMarker(new MarkerOptions().position(localUsuario).title("Meu local"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localUsuario,15));
+
+
+                /*
+                Geocoding -> processo de transformar um endereço
+                ou descrição de um local em latitude/longitude
+                Reverse Geocoding -> processo de transformar latitude/longitude
+                em um endereço
+                */
+                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault() );
+
+                try {
+
+                    //List<Address> listaEndereco = geocoder.getFromLocation(latitude, longitude,1);
+                    String stringEndereco = "Avenida Maua, 1374 - Centenario, Sapiranga - RS";
+                    List<Address> listaEndereco = geocoder.getFromLocationName(stringEndereco,1);
+                    if( listaEndereco != null && listaEndereco.size() > 0 ){
+                        Address endereco = listaEndereco.get(0);
+
+                        /*
+                         * onLocationChanged:
+                         * Address[
+                         *   addressLines=[0:"Av. República do Líbano, 1291 - Parque Ibirapuera, São Paulo - SP, Brazil"],
+                         *   feature=1291,
+                         *   admin=São Paulo,
+                         *   sub-admin=São Paulo,
+                         *   locality=São Paulo,
+                         *   thoroughfare=Avenida República do Líbano,
+                         *   postalCode=null,
+                         *   countryCode=BR,
+                         *   countryName=Brazil,
+                         *   hasLatitude=true,
+                         *   latitude=-23.5926719,
+                         *   hasLongitude=true,
+                         *   longitude=-46.6647561,
+                         *   phone=null,
+                         *   url=null,
+                         *   extras=null]
+                         * */
+
+                        Double lat = endereco.getLatitude();
+                        Double lon = endereco.getLongitude();
+
+                        mMap.clear();
+                        LatLng localUsuario = new LatLng(lat, lon);
+                        mMap.addMarker(new MarkerOptions().position(localUsuario).title("Meu local"));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localUsuario,18));
+
+                        Log.d("local", "onLocationChanged: " + endereco.getAddressLine(0) );
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -117,6 +197,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
