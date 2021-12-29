@@ -111,12 +111,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //-23.590679, -46.652288
 
 
-                /*
-                Geocoding -> processo de transformar um endereço
-                ou descrição de um local em latitude/longitude
-                Reverse Geocoding -> processo de transformar latitude/longitude
-                em um endereço
-                */
+
+                //Geocoding -> processo de transformar um endereço
+                //ou descrição de um local em latitude/longitude
+                //Reverse Geocoding -> processo de transformar latitude/longitude
+                //em um endereço
+
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault() );
 
                 try {
@@ -128,24 +128,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Address endereco = listaEndereco.get(0);
 
                         /*
-                         * onLocationChanged:
-                         * Address[
-                         *   addressLines=[0:"Av. República do Líbano, 1291 - Parque Ibirapuera, São Paulo - SP, Brazil"],
-                         *   feature=1291,
-                         *   admin=São Paulo,
-                         *   sub-admin=São Paulo,
-                         *   locality=São Paulo,
-                         *   thoroughfare=Avenida República do Líbano,
-                         *   postalCode=null,
-                         *   countryCode=BR,
-                         *   countryName=Brazil,
-                         *   hasLatitude=true,
-                         *   latitude=-23.5926719,
-                         *   hasLongitude=true,
-                         *   longitude=-46.6647561,
-                         *   phone=null,
-                         *   url=null,
-                         *   extras=null]
+                         //* onLocationChanged:
+                         //* Address[
+                         //*   addressLines=[0:"Av. República do Líbano, 1291 - Parque Ibirapuera, São Paulo - SP, Brazil"],
+                         //*   feature=1291,
+                         //*   admin=São Paulo,
+                         //*   sub-admin=São Paulo,
+                         //*   locality=São Paulo,
+                         //*   thoroughfare=Avenida República do Líbano,
+                         //*   postalCode=null,
+                         //*   countryCode=BR,
+                         //*   countryName=Brazil,
+                         //*   hasLatitude=true,
+                         //*   latitude=-23.5926719,
+                         //*   hasLongitude=true,
+                         //*   longitude=-46.6647561,
+                         //*   phone=null,
+                         //*   url=null,
+                         //*   extras=null]
                          * */
 
                         Double lat = endereco.getLatitude();
