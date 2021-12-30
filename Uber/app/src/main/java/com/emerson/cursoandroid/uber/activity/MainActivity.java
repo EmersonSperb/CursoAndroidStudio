@@ -19,7 +19,7 @@ import com.emerson.cursoandroid.uber.helper.UsuarioFirebase;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
-    private String[] permissoes = new String[]{
+    private final String[] permissoes = new String[]{
             Manifest.permission.ACCESS_FINE_LOCATION
     };
 

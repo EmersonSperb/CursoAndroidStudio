@@ -9,6 +9,7 @@
         android:id="@+id/textRequisicaoNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="Motorista Maluco"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -17,6 +18,7 @@
         android:id="@+id/textRequisicaoDistancia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:text="0 km- aproximadamente"
         android:textSize="12sp" />
 </LinearLayout>

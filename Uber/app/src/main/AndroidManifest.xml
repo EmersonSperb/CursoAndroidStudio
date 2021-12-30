@@ -62,9 +62,6 @@
                 android:value="com.emerson.cursoandroid.uber.activity.RequisicoesActivity" />
         </activity>
 
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
     </application>
 
 </manifest>

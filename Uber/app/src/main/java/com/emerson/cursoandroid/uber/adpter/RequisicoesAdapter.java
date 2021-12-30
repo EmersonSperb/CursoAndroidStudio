@@ -18,9 +18,9 @@ import java.util.List;
 
 public class RequisicoesAdapter extends RecyclerView.Adapter<RequisicoesAdapter.MyViewHolder> {
 
-    private List<Requisicao> requisicoes;
-    private Context context;
-    private Usuario motorista;
+    private final List<Requisicao> requisicoes;
+    private final Context context;
+    private final Usuario motorista;
 
     public RequisicoesAdapter(List<Requisicao> requisicoes, Context context, Usuario motorista) {
         this.requisicoes = requisicoes;
@@ -49,9 +49,30 @@ public class RequisicoesAdapter extends RecyclerView.Adapter<RequisicoesAdapter.
                     Double.parseDouble(passageiro.getLongitude())
             );
 
+            //Fui obrigado a fazer isso pois não estava retornando os dados do motorista
+            String lat = motorista.getLatitude();
+            String lon = motorista.getLongitude();
+
+            String latitude;
+            String longitude;
+
+            if (lat != null){
+               latitude = lat;}
+            else{
+                latitude = "-29.569874";
+            }
+
+            if (lon != null){
+                longitude = lon;
+            }
+            else{
+                longitude = "-51.9857458";
+            }
             LatLng localMotorista = new LatLng(
-                    Double.parseDouble(motorista.getLatitude()),
-                    Double.parseDouble(motorista.getLongitude())
+                    /*Double.parseDouble(motorista.getLatitude()),
+                    Double.parseDouble(motorista.getLongitude())*/
+                    Double.parseDouble(latitude),
+                    Double.parseDouble(longitude)
             );
             float distancia = Local.calcularDistancia(localPassageiro, localMotorista);
             String distanciaFormatada = Local.formatarDistancia(distancia);

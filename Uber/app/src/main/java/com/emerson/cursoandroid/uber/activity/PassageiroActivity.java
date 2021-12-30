@@ -447,8 +447,18 @@ public class PassageiroActivity extends AppCompatActivity
         requisicao.setDestino( destino );
 
         Usuario usuarioPassageiro = UsuarioFirebase.getDadosUsuarioLogado();
-        usuarioPassageiro.setLatitude( String.valueOf( localPassageiro.latitude ) );
-        usuarioPassageiro.setLongitude( String.valueOf( localPassageiro.longitude ) );
+        //não está buscando a droga da localização
+        if ( localPassageiro.latitude != 0 ){
+           usuarioPassageiro.setLatitude( String.valueOf( localPassageiro.latitude ) );}
+        else{
+            usuarioPassageiro.setLatitude( "-29.568741" );
+        };
+         if (localPassageiro.longitude != 0){
+            usuarioPassageiro.setLongitude( String.valueOf( localPassageiro.longitude ) );}
+         else{
+            usuarioPassageiro.setLongitude("-51.41215");
+         }
+
 
         requisicao.setPassageiro( usuarioPassageiro );
         requisicao.setStatus( Requisicao.STATUS_AGUARDANDO );

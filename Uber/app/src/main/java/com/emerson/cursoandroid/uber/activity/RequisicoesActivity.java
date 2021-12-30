@@ -44,7 +44,7 @@ public class RequisicoesActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
     private DatabaseReference firebaseRef;
-    private List<Requisicao> listaRequisicoes = new ArrayList<>();
+    private final List<Requisicao> listaRequisicoes = new ArrayList<>();
     private RequisicoesAdapter adapter;
     private Usuario motorista;
 
@@ -113,13 +113,19 @@ public class RequisicoesActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
 
                 //recuperar latitude e longitude
-                String latitude = String.valueOf(location.getLatitude());
-                String longitude = String.valueOf(location.getLongitude());
+                double lat = location.getLatitude();
+                double lon = location.getLongitude();
+                String latitude = String.valueOf(lat);
+                String longitude = String.valueOf(lon);
+                /*String latitude = String.valueOf(location.getLatitude());
+                String longitude = String.valueOf(location.getLongitude());*/
 
                 //Atualizar GeoFire
                 UsuarioFirebase.atualizarDadosLocalizacao(
-                        location.getLatitude(),
-                        location.getLongitude()
+                        /*location.getLatitude(),
+                        location.getLongitude()*/
+                        lat,
+                        lon
                 );
 
                 if( !latitude.isEmpty() && !longitude.isEmpty() ){
