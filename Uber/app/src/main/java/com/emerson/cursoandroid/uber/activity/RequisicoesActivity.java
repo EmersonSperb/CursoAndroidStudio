@@ -113,19 +113,19 @@ public class RequisicoesActivity extends AppCompatActivity {
             public void onLocationChanged(Location location) {
 
                 //recuperar latitude e longitude
-                double lat = location.getLatitude();
+                /*double lat = location.getLatitude();
                 double lon = location.getLongitude();
                 String latitude = String.valueOf(lat);
-                String longitude = String.valueOf(lon);
-                /*String latitude = String.valueOf(location.getLatitude());
-                String longitude = String.valueOf(location.getLongitude());*/
+                String longitude = String.valueOf(lon);*/
+                String latitude = String.valueOf(location.getLatitude());
+                String longitude = String.valueOf(location.getLongitude());
 
                 //Atualizar GeoFire
                 UsuarioFirebase.atualizarDadosLocalizacao(
-                        /*location.getLatitude(),
-                        location.getLongitude()*/
-                        lat,
-                        lon
+                        location.getLatitude(),
+                        location.getLongitude()
+                        /*lat,
+                        lon*/
                 );
 
                 if( !latitude.isEmpty() && !longitude.isEmpty() ){

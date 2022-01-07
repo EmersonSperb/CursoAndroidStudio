@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "163744369927",
+    "firebase_url": "https://ifood-curso-2cab0-default-rtdb.firebaseio.com",
+    "project_id": "ifood-curso-2cab0",
+    "storage_bucket": "ifood-curso-2cab0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163744369927:android:7634133439901e0f6089a2",
+        "android_client_info": {
+          "package_name": "com.emerson.cursoandroid.ifoodcurso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163744369927-4da1vjffjaf87d3itqretencomvr5ejv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfbKTY6RdypOwiNy3KZK8BXZ7kjcefV_A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163744369927-4da1vjffjaf87d3itqretencomvr5ejv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

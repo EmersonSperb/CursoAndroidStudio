@@ -439,8 +439,8 @@ public class CorridaActivity extends AppCompatActivity
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
             locationManager.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER,
-                    10000,
-                    10,
+                    5000,
+                    5,
                     locationListener
             );
         }
