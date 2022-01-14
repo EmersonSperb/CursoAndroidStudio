@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -143,8 +144,10 @@ public class CardapioActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 String quantidade = editQuantidade.getText().toString();
+                Log.i("qtde",quantidade);
 
                 Produto produtoSelecionado = produtos.get(posicao);
+                Log.i("posicao",String.valueOf(posicao));
                 ItemPedido itemPedido = new ItemPedido();
                 itemPedido.setIdProduto( produtoSelecionado.getIdProduto() );
                 itemPedido.setNomeProduto( produtoSelecionado.getNome() );
@@ -153,9 +156,11 @@ public class CardapioActivity extends AppCompatActivity {
 
                 itensCarrinho.add( itemPedido );
 
-                if( pedidoRecuperado == null ){
+                /*if( pedidoRecuperado == null ){
                     pedidoRecuperado = new Pedido(idUsuarioLogado, idEmpresa);
-                }
+                }*/
+
+                pedidoRecuperado = new Pedido(idUsuarioLogado, idEmpresa);
 
                 pedidoRecuperado.setNome( usuario.getNome() );
                 pedidoRecuperado.setEndereco( usuario.getEndereco() );
