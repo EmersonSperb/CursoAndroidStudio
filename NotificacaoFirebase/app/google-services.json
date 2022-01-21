@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "704517646210",
+    "project_id": "notificacao-firebase-cb980",
+    "storage_bucket": "notificacao-firebase-cb980.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704517646210:android:6c948205e70d1177c7519b",
+        "android_client_info": {
+          "package_name": "com.emerson.cursoandroid.notificacaofirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "704517646210-71ebupnv8q675mg8hpc62s5bq59cvp9d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emerson.cursoandroid.notificacaofirebase",
+            "certificate_hash": "ff73cb1c8041837a29e3a3eff74f9e19e183fb64"
+          }
+        },
+        {
+          "client_id": "704517646210-vm7hlf0vqgscflmknff32q68osivlimn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkqO-07ULJ5M6LNk2Igvu89dWectaFv3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "704517646210-vm7hlf0vqgscflmknff32q68osivlimn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
